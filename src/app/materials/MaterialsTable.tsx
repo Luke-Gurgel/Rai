@@ -26,6 +26,7 @@ export const MaterialsTable: React.FC<MaterialsTableProps> = (props) => {
   return (
     <>
       <MuiTable
+        variant="outlined"
         borderAxis="none"
         stripe="odd"
         hoverRow
@@ -43,11 +44,12 @@ export const MaterialsTable: React.FC<MaterialsTableProps> = (props) => {
         <thead>
           <tr>
             <th style={{ width: 50 }} aria-label="empty" />
-            <th style={{ width: "5%" }}>ID</th>
             <th>Nome</th>
             <th>Categoria</th>
             <th>Quantidate total</th>
             <th>Quantidate mínima</th>
+            <th>Preço da última compra</th>
+            <th>Data da última compra</th>
             <th aria-label="last" />
           </tr>
         </thead>

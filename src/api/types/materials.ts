@@ -10,8 +10,8 @@ export interface Material {
   principioAtivo: string;
   category: MaterialCategory;
   totalQuantityInStock: number;
+  lastPurchasePrice: number;
+  lastPurchaseDate: string;
   minQuantity: number;
-  lotes: {
-    [lote: string]: { quantity: number; expDate: string };
-  };
+  lotes: { lote: string; quantity: number; expDate: string }[];
 }
