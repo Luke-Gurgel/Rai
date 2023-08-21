@@ -27,8 +27,7 @@ export const MaterialsTable: React.FC<MaterialsTableProps> = (props) => {
     <>
       <MuiTable
         variant="outlined"
-        borderAxis="none"
-        stripe="odd"
+        borderAxis="xBetween"
         hoverRow
         sx={{
           "& tr > *:first-child": {

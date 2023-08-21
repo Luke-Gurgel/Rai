@@ -21,7 +21,7 @@ export const CollapsibleRow = (props: Props) => {
                 <th>Validade</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white">
               {props.material.lotes.map((lotInfo) => (
                 <tr key={lotInfo.lote}>
                   <td>{lotInfo.lote}</td>
