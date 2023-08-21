@@ -1,14 +1,15 @@
 import List from "@mui/joy/List";
-import ListItem from "@mui/joy/ListItem";
 import { Stack, Modal, ModalDialog, Typography } from "@mui/joy";
-import { RegisterNewMaterialForm } from "./RegisterNewMaterialForm";
+import { MaterialForm } from "./MaterialForm";
+import { MaterialFormType } from "./types";
 
 interface Props {
+  formType: MaterialFormType;
   isOpen: boolean;
   close: () => void;
 }
 
-export const RegisterNewMaterialModal = (props: Props) => {
+export const MaterialModal = (props: Props) => {
   return (
     <Modal open={props.isOpen} onClose={props.close}>
       <ModalDialog layout="center" variant="outlined" size="lg">
@@ -21,9 +22,11 @@ export const RegisterNewMaterialModal = (props: Props) => {
         >
           <Stack spacing={2} className="px-3">
             <Typography level="h3" className="">
-              Registrar Novo Material
+              {props.formType === MaterialFormType.RESGISTER
+                ? " Registrar Novo Material"
+                : "Editar Material"}
             </Typography>
-            <RegisterNewMaterialForm />
+            <MaterialForm formType={props.formType} />
           </Stack>
         </List>
       </ModalDialog>

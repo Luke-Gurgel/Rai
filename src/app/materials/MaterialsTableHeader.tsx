@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { Box, IconButton, Typography, Tooltip } from "@mui/joy";
-import { FilterList, AddCircleRounded, Add } from "@mui/icons-material";
-import { RegisterNewMaterialModal } from "./RegisterNewMaterialModal";
+import { FilterList, AddCircleRounded } from "@mui/icons-material";
+import { MaterialModal } from "./MaterialModal";
+import { MaterialFormType } from "./types";
 
 export const MaterialsTableHeader = () => {
-  const [isRegisterNewMaterialModalOpen, setIsRegisterNewMaterialModalOpen] =
+  const [isRegisterMaterialModalOpen, setIsRegisterMaterialModalOpen] =
     useState(false);
 
   return (
@@ -25,7 +26,7 @@ export const MaterialsTableHeader = () => {
             size="sm"
             color="neutral"
             variant="outlined"
-            onClick={() => setIsRegisterNewMaterialModalOpen(true)}
+            onClick={() => setIsRegisterMaterialModalOpen(true)}
           >
             <AddCircleRounded />
           </IconButton>
@@ -35,9 +36,10 @@ export const MaterialsTableHeader = () => {
             <FilterList />
           </IconButton>
         </Tooltip>
-        <RegisterNewMaterialModal
-          isOpen={isRegisterNewMaterialModalOpen}
-          close={() => setIsRegisterNewMaterialModalOpen(false)}
+        <MaterialModal
+          isOpen={isRegisterMaterialModalOpen}
+          close={() => setIsRegisterMaterialModalOpen(false)}
+          formType={MaterialFormType.RESGISTER}
         />
       </div>
     </Box>

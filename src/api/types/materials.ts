@@ -6,9 +6,12 @@ export enum MaterialCategory {
 export interface Material {
   id: number;
   name: string;
-  quantity: number;
-  minQuantity: number;
   grupoQuimico: string;
   principioAtivo: string;
   category: MaterialCategory;
+  totalQuantityInStock: number;
+  minQuantity: number;
+  lotes: {
+    [lote: string]: { quantity: number; expDate: string };
+  };
 }

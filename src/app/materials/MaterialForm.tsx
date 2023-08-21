@@ -7,10 +7,13 @@ import FormControl from "@mui/joy/FormControl";
 import { MaterialCategory } from "@/api/types/materials";
 import { InputMessage } from "@/components/InputMessage";
 import { Input } from "@/components/Input";
+import { MaterialFormType } from "./types";
 
-interface Props {}
+interface Props {
+  formType: MaterialFormType;
+}
 
-export const RegisterNewMaterialForm = (props: Props) => {
+export const MaterialForm = (props: Props) => {
   return (
     <form
       onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
