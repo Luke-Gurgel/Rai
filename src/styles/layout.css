@@ -2,4 +2,5 @@
   height: 100vh;
   background-color: white;
   padding: 4rem;
+  @apply overflow-scroll scroll-smooth;
 }
