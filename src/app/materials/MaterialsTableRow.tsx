@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button, IconButton } from "@mui/joy";
+import { IconButton, Tooltip } from "@mui/joy";
 import { Material } from "@/api/types/materials";
 import { CollapsibleRow } from "./CollapsibleRow";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
@@ -48,20 +48,24 @@ export const MaterialsTableRow = (props: Props) => {
         <td>{props.material.lastPurchaseDate}</td>
         <td>
           <div className="flex justify-end gap-x-2">
-            <Button
-              size="sm"
-              className="bg-sky-500 hover:bg-sky-400 text-white"
-              onClick={props.onEditButtonClick}
-            >
-              <EditRoundedIcon fontSize="small" />
-            </Button>
-            <Button
-              size="sm"
-              className="bg-red-400 hover:bg-red-300 text-white"
-              onClick={props.onDeleteButtonClick}
-            >
-              <DeleteRoundedIcon fontSize="small" />
-            </Button>
+            <Tooltip title="Editar material" placement="top" variant="soft">
+              <IconButton
+                size="sm"
+                className="bg-sky-500 hover:bg-sky-400 text-white"
+                onClick={props.onEditButtonClick}
+              >
+                <EditRoundedIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Deletar material" placement="top" variant="soft">
+              <IconButton
+                size="sm"
+                className="bg-red-400 hover:bg-red-300 text-white"
+                onClick={props.onDeleteButtonClick}
+              >
+                <DeleteRoundedIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
           </div>
         </td>
       </tr>
