@@ -29,7 +29,7 @@ export const MaterialFilters = () => {
           <FilterList />
         </MenuButton>
       </Tooltip>
-      <Menu variant="soft" size="md" placement="bottom-end">
+      <Menu variant="plain" size="md" placement="bottom-end">
         <MenuItem>
           <Checkbox label="< quant. mín." size="md" variant="outlined" />
         </MenuItem>
