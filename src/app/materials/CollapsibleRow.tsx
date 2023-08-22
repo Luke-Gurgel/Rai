@@ -42,7 +42,7 @@ export const CollapsibleRow = (props: Props) => {
                       <div>
                         <IconButton
                           size="sm"
-                          className="icon-button gap-x-1"
+                          className="no-bg-button gap-x-1"
                           onClick={() =>
                             setMateriaInventoryToEdit(materialInventory)
                           }

@@ -52,7 +52,7 @@ export const MaterialsTableRow = (props: Props) => {
             <Tooltip title="Editar material" placement="top" variant="soft">
               <IconButton
                 size="md"
-                className="icon-button"
+                className="no-bg-button"
                 onClick={props.onEditButtonClick}
               >
                 <EditRoundedIcon fontSize="small" />
@@ -61,7 +61,7 @@ export const MaterialsTableRow = (props: Props) => {
             <Tooltip title="Deletar material" placement="top" variant="soft">
               <IconButton
                 size="sm"
-                className="icon-button"
+                className="no-bg-button"
                 onClick={props.onDeleteButtonClick}
               >
                 <DeleteRoundedIcon fontSize="small" />

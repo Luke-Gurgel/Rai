@@ -1,4 +1,4 @@
-.icon-button {
+.no-bg-button {
   @apply bg-transparent hover:bg-transparent;
   @apply hover:text-slate-500 text-slate-800;
 }

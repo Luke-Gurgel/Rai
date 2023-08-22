@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Box, IconButton, Typography, Tooltip } from "@mui/joy";
-import { FilterList, AddCircleRounded } from "@mui/icons-material";
+import { AddCircleRounded } from "@mui/icons-material";
+import { MaterialFilters } from "./MaterialFilters";
 import { MaterialModal } from "./MaterialModal";
 import { MaterialFormType } from "./types";
 
@@ -31,11 +32,7 @@ export const MaterialsTableHeader = () => {
             <AddCircleRounded />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Filtrar materiais" variant="soft" placement="top">
-          <IconButton size="sm" variant="outlined" color="neutral">
-            <FilterList />
-          </IconButton>
-        </Tooltip>
+        <MaterialFilters />
         <MaterialModal
           isOpen={isRegisterMaterialModalOpen}
           close={() => setIsRegisterMaterialModalOpen(false)}
