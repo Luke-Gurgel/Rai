@@ -1,5 +1,7 @@
+import { Sheet, Typography, Table, IconButton } from "@mui/joy";
 import { Material } from "@/api/types/materials";
-import { Sheet, Typography, Table } from "@mui/joy";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import "./styles.css";
 
 interface Props {
   material: Material;
@@ -13,12 +15,13 @@ export const CollapsibleRow = (props: Props) => {
           <Typography level="body-lg" component="div">
             Unidades por lotes
           </Typography>
-          <Table size="md" variant="outlined" borderAxis="bothBetween">
+          <Table size="md" variant="outlined" borderAxis="xBetween">
             <thead>
               <tr>
                 <th>Lote</th>
                 <th>Quantidade</th>
                 <th>Validade</th>
+                <th />
               </tr>
             </thead>
             <tbody className="bg-white">
@@ -27,6 +30,14 @@ export const CollapsibleRow = (props: Props) => {
                   <td>{lotInfo.lote}</td>
                   <td>{lotInfo.quantity}</td>
                   <td>{lotInfo.expDate}</td>
+                  <td>
+                    <div>
+                      <IconButton size="sm" className="icon-button gap-x-1">
+                        <EditRoundedIcon fontSize="small" />
+                        Editar
+                      </IconButton>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

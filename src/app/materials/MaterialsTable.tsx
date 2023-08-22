@@ -49,7 +49,7 @@ export const MaterialsTable: React.FC<MaterialsTableProps> = (props) => {
             <th>Quantidate mínima</th>
             <th>Preço da última compra</th>
             <th>Data da última compra</th>
-            <th aria-label="last" />
+            <th />
           </tr>
         </thead>
         <tbody>

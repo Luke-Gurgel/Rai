@@ -8,6 +8,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import "./styles.css";
 
 interface Props {
   material: Material;
@@ -44,14 +45,14 @@ export const MaterialsTableRow = (props: Props) => {
         <td>{props.material.category}</td>
         <td>{props.material.totalQuantityInStock}</td>
         <td>{props.material.minQuantity}</td>
-        <td>{props.material.lastPurchasePrice}</td>
+        <td>R${props.material.lastPurchasePrice}</td>
         <td>{props.material.lastPurchaseDate}</td>
         <td>
-          <div className="flex justify-end gap-x-2">
+          <div className="flex justify-end">
             <Tooltip title="Editar material" placement="top" variant="soft">
               <IconButton
-                size="sm"
-                className="bg-sky-500 hover:bg-sky-400 text-white"
+                size="md"
+                className="icon-button"
                 onClick={props.onEditButtonClick}
               >
                 <EditRoundedIcon fontSize="small" />
@@ -60,7 +61,7 @@ export const MaterialsTableRow = (props: Props) => {
             <Tooltip title="Deletar material" placement="top" variant="soft">
               <IconButton
                 size="sm"
-                className="bg-red-400 hover:bg-red-300 text-white"
+                className="icon-button"
                 onClick={props.onDeleteButtonClick}
               >
                 <DeleteRoundedIcon fontSize="small" />
