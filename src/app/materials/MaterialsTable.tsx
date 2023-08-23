@@ -8,17 +8,23 @@ import { MaterialsTableRow } from "./MaterialsTableRow";
 import { LoadingTable } from "@/components/LoadingTable";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
 import { useAppSelector } from "@/store/hooks";
+import { applyMaterialFilters } from "./helpers";
 
 export const MaterialsTable: React.FC = () => {
-  const materialsTableData = useAppSelector((state) => state.materials);
+  const materialsState = useAppSelector((state) => state.materials);
   const [materialToEdit, setMaterialToEdit] = useState<Material | null>(null);
   const [materialToDelete, setMaterialToDelete] = useState<Material | null>(
     null
   );
 
-  if (!materialsTableData.length) {
+  if (!materialsState.data.length) {
     return <LoadingTable />;
   }
+
+  const filteredMaterials = applyMaterialFilters(
+    materialsState.data,
+    materialsState.filters
+  );
 
   return (
     <>
@@ -50,7 +56,7 @@ export const MaterialsTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {materialsTableData.map((material) => (
+          {filteredMaterials.map((material) => (
             <MaterialsTableRow
               key={material.id}
               material={material}
