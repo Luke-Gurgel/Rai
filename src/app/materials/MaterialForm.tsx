@@ -4,13 +4,12 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
-import { MaterialCategory } from "@/api/types/materials";
+import { Material, MaterialCategory } from "@/api/types/materials";
 import { InputMessage } from "@/components/InputMessage";
 import { Input } from "@/components/Input";
-import { MaterialFormType } from "./types";
 
 interface Props {
-  formType: MaterialFormType;
+  material?: Material;
 }
 
 export const MaterialForm = (props: Props) => {
@@ -23,12 +22,21 @@ export const MaterialForm = (props: Props) => {
       <Stack spacing={2}>
         <FormControl required>
           <FormLabel>Nome</FormLabel>
-          <Input autoFocus required placeholder="Nome do material" />
-          <InputMessage message="Esse campo é obrigatório" />
+          <Input
+            autoFocus
+            required
+            placeholder="Nome do material"
+            defaultValue={props.material?.name}
+          />
+          {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <FormControl required>
           <FormLabel>Categoria</FormLabel>
-          <Select variant="outlined" placeholder="Categoria do material">
+          <Select
+            variant="outlined"
+            placeholder="Categoria do material"
+            defaultValue={props.material?.category}
+          >
             {Object.entries(MaterialCategory).map(([key, val]) => {
               return (
                 <Option key={key} value={key}>
@@ -37,22 +45,35 @@ export const MaterialForm = (props: Props) => {
               );
             })}
           </Select>
-          <InputMessage message="Esse campo é obrigatório" />
+          {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <FormControl required>
           <FormLabel>Grupo químico</FormLabel>
-          <Input required placeholder="Grupo químico do material" />
-          <InputMessage message="Esse campo é obrigatório" />
+          <Input
+            required
+            placeholder="Grupo químico do material"
+            defaultValue={props.material?.grupoQuimico}
+          />
+          {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <FormControl required>
           <FormLabel>Princípio ativo</FormLabel>
-          <Input required placeholder="Princípio ativo do material" />
-          <InputMessage message="Esse campo é obrigatório" />
+          <Input
+            required
+            placeholder="Princípio ativo do material"
+            defaultValue={props.material?.principioAtivo}
+          />
+          {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <FormControl required>
           <FormLabel>Quantidate mínima</FormLabel>
-          <Input required type="number" placeholder="Quantidade mínima" />
-          <InputMessage message="Esse campo é obrigatório" />
+          <Input
+            required
+            type="number"
+            placeholder="Quantidade mínima"
+            defaultValue={props.material?.minQuantity}
+          />
+          {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <Button type="submit" className="bg-sky-500">
           Submit

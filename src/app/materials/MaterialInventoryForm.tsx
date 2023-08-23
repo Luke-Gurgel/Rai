@@ -45,7 +45,7 @@ export const MaterialInventoryForm = (props: Props) => {
           {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <Button type="submit" className="bg-sky-500">
-          Submit
+          Atualizar
         </Button>
       </Stack>
     </form>

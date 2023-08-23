@@ -8,7 +8,6 @@ import { MaterialsTableRow } from "./MaterialsTableRow";
 import { LoadingTable } from "@/components/LoadingTable";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
 import { useAppSelector } from "@/store/hooks";
-import { MaterialFormType } from "./types";
 
 export const MaterialsTable: React.FC = () => {
   const materialsTableData = useAppSelector((state) => state.materials);
@@ -64,7 +63,7 @@ export const MaterialsTable: React.FC = () => {
       <MaterialModal
         isOpen={!!materialToEdit}
         close={() => setMaterialToEdit(null)}
-        formType={MaterialFormType.EDIT}
+        material={materialToEdit as Material}
       />
       <ConfirmDeleteModal
         isOpen={!!materialToDelete}

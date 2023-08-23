@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Material, MaterialInventory } from "@/api/types/materials";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import { Sheet, Typography, Table, IconButton } from "@mui/joy";
+import { Material, MaterialInventory } from "@/api/types/materials";
+import { Box, Sheet, Typography, Table, IconButton, Tooltip } from "@mui/joy";
 import { MaterialInventoryModal } from "./MaterialInventoryModal";
+import { AddCircleRounded } from "@mui/icons-material";
 import "./styles.css";
 
 interface Props {
@@ -20,9 +21,20 @@ export const CollapsibleRow = (props: Props) => {
       <tr>
         <td style={{ height: 0, padding: 0 }} colSpan={8}>
           <Sheet className="bg-slate-100 flex flex-col gap-y-2 p-3">
-            <Typography level="body-lg" component="div">
-              Unidades por lotes
-            </Typography>
+            <Box className="flex justify-between">
+              <Typography level="body-lg" component="div">
+                Unidades em estoque por lote
+              </Typography>
+              <Tooltip
+                variant="soft"
+                placement="top"
+                title="Adicionar ao estoque"
+              >
+                <IconButton size="sm" color="neutral" variant="outlined">
+                  <AddCircleRounded />
+                </IconButton>
+              </Tooltip>
+            </Box>
             <Table size="md" variant="outlined" borderAxis="xBetween">
               <thead>
                 <tr>

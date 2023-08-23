@@ -5,11 +5,9 @@ import { Box, IconButton, Typography, Tooltip } from "@mui/joy";
 import { AddCircleRounded } from "@mui/icons-material";
 import { MaterialFilters } from "./MaterialFilters";
 import { MaterialModal } from "./MaterialModal";
-import { MaterialFormType } from "./types";
 
 export const MaterialsTableHeader = () => {
-  const [isRegisterMaterialModalOpen, setIsRegisterMaterialModalOpen] =
-    useState(false);
+  const [isMaterialModalOpen, setMaterialModalOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -27,16 +25,15 @@ export const MaterialsTableHeader = () => {
             size="sm"
             color="neutral"
             variant="outlined"
-            onClick={() => setIsRegisterMaterialModalOpen(true)}
+            onClick={() => setMaterialModalOpen(true)}
           >
             <AddCircleRounded />
           </IconButton>
         </Tooltip>
         <MaterialFilters />
         <MaterialModal
-          isOpen={isRegisterMaterialModalOpen}
-          close={() => setIsRegisterMaterialModalOpen(false)}
-          formType={MaterialFormType.RESGISTER}
+          isOpen={isMaterialModalOpen}
+          close={() => setMaterialModalOpen(false)}
         />
       </div>
     </Box>

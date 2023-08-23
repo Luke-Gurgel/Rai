@@ -1,6 +1,6 @@
 export enum MaterialCategory {
-  RATO = "Rato",
-  INSETO = "Inseto",
+  RATO = "RATO",
+  INSETO = "INSETO",
 }
 
 export interface MaterialInventory {
