@@ -1,25 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { Table as MuiTable } from "@mui/joy";
 import { MaterialModal } from "./MaterialModal";
 import { Material } from "@/api/types/materials";
-import { Table as MuiTable } from "@mui/joy";
 import { MaterialsTableRow } from "./MaterialsTableRow";
 import { LoadingTable } from "@/components/LoadingTable";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
+import { useAppSelector } from "@/store/hooks";
 import { MaterialFormType } from "./types";
 
-export interface MaterialsTableProps {
-  materialsTableData: Material[];
-}
-
-export const MaterialsTable: React.FC<MaterialsTableProps> = (props) => {
+export const MaterialsTable: React.FC = () => {
+  const materialsTableData = useAppSelector((state) => state.materials);
   const [materialToEdit, setMaterialToEdit] = useState<Material | null>(null);
   const [materialToDelete, setMaterialToDelete] = useState<Material | null>(
     null
   );
 
-  if (!props.materialsTableData.length) {
+  if (!materialsTableData.length) {
     return <LoadingTable />;
   }
 
@@ -53,7 +51,7 @@ export const MaterialsTable: React.FC<MaterialsTableProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.materialsTableData.map((material) => (
+          {materialsTableData.map((material) => (
             <MaterialsTableRow
               key={material.id}
               material={material}
