@@ -8,7 +8,7 @@ import { Input } from "@/components/Input";
 
 interface Props {
   material: Material;
-  materialInventory: MaterialInventory;
+  materialInventory?: MaterialInventory;
 }
 
 export const MaterialInventoryForm = (props: Props) => {
@@ -23,7 +23,7 @@ export const MaterialInventoryForm = (props: Props) => {
           <FormLabel>Lote</FormLabel>
           <Input
             placeholder="Numero de lote"
-            defaultValue={props.materialInventory.lote}
+            defaultValue={props.materialInventory?.lote}
           />
           {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
@@ -31,7 +31,7 @@ export const MaterialInventoryForm = (props: Props) => {
           <FormLabel>Data de validade</FormLabel>
           <Input
             placeholder="Data de validade"
-            defaultValue={props.materialInventory.expDate}
+            defaultValue={props.materialInventory?.expDate}
           />
           {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
@@ -40,12 +40,12 @@ export const MaterialInventoryForm = (props: Props) => {
           <Input
             type="number"
             placeholder="Quantidade em estoque"
-            defaultValue={props.materialInventory.quantity}
+            defaultValue={props.materialInventory?.quantity}
           />
           {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <Button type="submit" className="bg-sky-500">
-          Atualizar
+          {!!props.materialInventory ? "Atualizar" : "Adicionar"}
         </Button>
       </Stack>
     </form>

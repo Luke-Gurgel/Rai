@@ -76,7 +76,7 @@ export const MaterialForm = (props: Props) => {
           {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <Button type="submit" className="bg-sky-500">
-          Submit
+          {!!props.material ? "Atualizar" : "Registrar"}
         </Button>
       </Stack>
     </form>

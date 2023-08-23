@@ -22,9 +22,7 @@ export const MaterialModal = (props: Props) => {
         >
           <Stack spacing={2} className="px-3">
             <Typography level="h3" className="">
-              {props.material !== undefined
-                ? "Editar Material"
-                : "Registrar Novo Material"}
+              {!!props.material ? "Editar Material" : "Registrar Novo Material"}
             </Typography>
             <MaterialForm material={props.material} />
           </Stack>

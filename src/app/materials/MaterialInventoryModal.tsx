@@ -7,7 +7,7 @@ interface Props {
   isOpen: boolean;
   close: () => void;
   material: Material;
-  materialInventory: MaterialInventory;
+  materialInventory?: MaterialInventory;
 }
 
 export const MaterialInventoryModal = (props: Props) => {
@@ -23,7 +23,9 @@ export const MaterialInventoryModal = (props: Props) => {
         >
           <Stack spacing={2} className="px-3">
             <Typography level="h3" className="">
-              Editar estoque
+              {!!props.materialInventory
+                ? "Editar unidade em estoque"
+                : "Adicionar ao estoque"}
             </Typography>
             <Typography level="body-md">
               <strong>{props.material.name}</strong>

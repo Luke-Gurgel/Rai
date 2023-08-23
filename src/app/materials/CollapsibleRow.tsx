@@ -12,9 +12,23 @@ interface Props {
   material: Material;
 }
 
+interface InventoryModalState {
+  open: boolean;
+  inventoryToEdit?: MaterialInventory;
+}
+
 export const CollapsibleRow = (props: Props) => {
-  const [materiaInventoryToEdit, setMateriaInventoryToEdit] =
-    useState<MaterialInventory | null>(null);
+  const defaultModalState = { open: false };
+  const [inventoryModalState, setInventoryModalState] =
+    useState<InventoryModalState>(defaultModalState);
+
+  const editMaterialInventory = (materialInventory: MaterialInventory) => {
+    setInventoryModalState({ inventoryToEdit: materialInventory, open: true });
+  };
+
+  const addtMaterialInventory = () => {
+    setInventoryModalState({ open: true });
+  };
 
   return (
     <>
@@ -30,7 +44,12 @@ export const CollapsibleRow = (props: Props) => {
                 placement="top"
                 title="Adicionar ao estoque"
               >
-                <IconButton size="sm" color="neutral" variant="outlined">
+                <IconButton
+                  size="sm"
+                  color="neutral"
+                  variant="outlined"
+                  onClick={addtMaterialInventory}
+                >
                   <AddCircleRounded />
                 </IconButton>
               </Tooltip>
@@ -56,7 +75,7 @@ export const CollapsibleRow = (props: Props) => {
                           size="sm"
                           className="no-bg-button gap-x-1"
                           onClick={() =>
-                            setMateriaInventoryToEdit(materialInventory)
+                            editMaterialInventory(materialInventory)
                           }
                         >
                           <EditRoundedIcon fontSize="small" />
@@ -73,9 +92,9 @@ export const CollapsibleRow = (props: Props) => {
       </tr>
       <MaterialInventoryModal
         material={props.material}
-        isOpen={!!materiaInventoryToEdit}
-        materialInventory={materiaInventoryToEdit as MaterialInventory}
-        close={() => setMateriaInventoryToEdit(null)}
+        isOpen={inventoryModalState.open}
+        materialInventory={inventoryModalState.inventoryToEdit}
+        close={() => setInventoryModalState(defaultModalState)}
       />
     </>
   );
