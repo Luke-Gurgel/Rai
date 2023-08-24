@@ -6,6 +6,7 @@ import FormControl from "@mui/joy/FormControl";
 import { InputMessage } from "@/components/InputMessage";
 import { Material, MaterialInventory } from "@/api/types/materials";
 import { useMaterialInventoryForm } from "./useMaterialInventoryForm";
+import { format } from "date-fns";
 
 interface Props {
   material: Material;
@@ -28,7 +29,6 @@ export const MaterialInventoryForm = (props: Props) => {
           <FormLabel>Lote</FormLabel>
           <Input
             placeholder="Numero de lote"
-            defaultValue={props.materialInventory?.lote}
             {...form.register("lote", schema.get("lote"))}
           />
           {form.formState.errors.lote && (
@@ -40,7 +40,6 @@ export const MaterialInventoryForm = (props: Props) => {
           <Input
             type="date"
             placeholder="Data de validade"
-            defaultValue={props.materialInventory?.expDate}
             {...form.register("expDate", schema.get("expDate"))}
           />
           {form.formState.errors.expDate && (
@@ -52,7 +51,6 @@ export const MaterialInventoryForm = (props: Props) => {
           <Input
             type="number"
             placeholder="Quantidade em estoque"
-            defaultValue={props.materialInventory?.quantity}
             {...form.register("quantity", schema.get("quantity"))}
           />
           {form.formState.errors.quantity && (
