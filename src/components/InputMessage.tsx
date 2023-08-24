@@ -2,7 +2,7 @@ import FormHelperText from "@mui/joy/FormHelperText";
 import ReportGmailerrorredRoundedIcon from "@mui/icons-material/ReportGmailerrorredRounded";
 
 interface Props {
-  message: string;
+  message?: string;
 }
 
 export const InputMessage = (props: Props) => {
