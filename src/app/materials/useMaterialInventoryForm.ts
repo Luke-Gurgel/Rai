@@ -1,6 +1,6 @@
 import { useForm, RegisterOptions, UseFormReturn } from "react-hook-form";
 import { MaterialInventory } from "@/api/types/materials";
-import { isFuture } from "date-fns";
+import { isFuture, isPast } from "date-fns";
 
 interface UseMaterialInventoryForm {
   form: UseFormReturn<MaterialInventory>;
@@ -10,9 +10,7 @@ interface UseMaterialInventoryForm {
 export const useMaterialInventoryForm = (
   defaultValues?: MaterialInventory
 ): UseMaterialInventoryForm => {
-  const form = useForm<MaterialInventory>({
-    defaultValues: { ...defaultValues, expDate: "2023-04-05" },
-  });
+  const form = useForm<MaterialInventory>({ defaultValues });
 
   const schema = new Map<keyof MaterialInventory, RegisterOptions>();
 
@@ -23,7 +21,7 @@ export const useMaterialInventoryForm = (
     required: "Favor indicar a quantidate",
     min: {
       value: 0,
-      message: "Quantidade dever ",
+      message: "Quantidade dever igual ou maior que zero",
     },
   });
 
@@ -33,6 +31,25 @@ export const useMaterialInventoryForm = (
     validate: {
       isFuture: (date) => {
         return isFuture(date) || "Data de validade deve ser futura";
+      },
+    },
+  });
+
+  schema.set("price", {
+    valueAsNumber: true,
+    required: "Favor indicar a preço da compra",
+    min: {
+      value: 1,
+      message: "Quantidade dever maior que zero",
+    },
+  });
+
+  schema.set("purchaseDate", {
+    valueAsDate: true,
+    required: "Favor indicar a data da compra",
+    validate: {
+      isPast: (date) => {
+        return isPast(date) || "Data da compra não pode ser futura";
       },
     },
   });

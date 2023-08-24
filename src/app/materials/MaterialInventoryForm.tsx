@@ -57,6 +57,30 @@ export const MaterialInventoryForm = (props: Props) => {
             <InputMessage message={form.formState.errors.quantity.message} />
           )}
         </FormControl>
+        <FormControl error={!!form.formState.errors.price}>
+          <FormLabel>Preço</FormLabel>
+          <Input
+            type="number"
+            placeholder="Preço da compra"
+            {...form.register("price", schema.get("price"))}
+          />
+          {form.formState.errors.price && (
+            <InputMessage message={form.formState.errors.price.message} />
+          )}
+        </FormControl>
+        <FormControl error={!!form.formState.errors.purchaseDate}>
+          <FormLabel>Data da compra</FormLabel>
+          <Input
+            type="date"
+            placeholder="Data da compra"
+            {...form.register("purchaseDate", schema.get("purchaseDate"))}
+          />
+          {form.formState.errors.purchaseDate && (
+            <InputMessage
+              message={form.formState.errors.purchaseDate.message}
+            />
+          )}
+        </FormControl>
         <Button type="submit" className="bg-sky-500">
           {!!props.materialInventory ? "Atualizar" : "Adicionar"}
         </Button>

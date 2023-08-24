@@ -50,8 +50,6 @@ export const MaterialsTable: React.FC = () => {
             <th>Categoria</th>
             <th>Quantidate total</th>
             <th>Quantidate mínima</th>
-            <th>Preço da última compra</th>
-            <th>Data da última compra</th>
             <th />
           </tr>
         </thead>

@@ -5,19 +5,18 @@ export enum MaterialCategory {
 
 export interface MaterialInventory {
   lote: string;
-  quantity: number;
   expDate: string;
+  quantity: number;
+  purchaseDate: string;
+  price: number;
 }
 
 export interface Material {
   id: number;
   name: string;
+  minQuantity: number;
   grupoQuimico: string;
   principioAtivo: string;
   category: MaterialCategory;
-  totalQuantityInStock: number;
-  lastPurchasePrice: number;
-  lastPurchaseDate: string;
-  minQuantity: number;
-  lotes: MaterialInventory[];
+  inventory: MaterialInventory[];
 }

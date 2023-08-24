@@ -8,6 +8,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { getTotalQuantityInInventory } from "./helpers";
 import "./styles.css";
 
 interface Props {
@@ -43,10 +44,8 @@ export const MaterialsTableRow = (props: Props) => {
         </td>
         <td>{props.material.name}</td>
         <td>{props.material.category}</td>
-        <td>{props.material.totalQuantityInStock}</td>
+        <td>{getTotalQuantityInInventory(props.material)}</td>
         <td>{props.material.minQuantity}</td>
-        <td>R${props.material.lastPurchasePrice}</td>
-        <td>{props.material.lastPurchaseDate}</td>
         <td>
           <div className="flex justify-end">
             <Tooltip title="Editar material" placement="top" variant="soft">

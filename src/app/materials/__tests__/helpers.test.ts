@@ -1,8 +1,20 @@
 import { describe, it, expect } from "vitest";
 import { mockMaterialsData } from "__mocks__/materials";
-import { isLowInventory, applyMaterialFilters } from "../helpers";
+import {
+  isLowInventory,
+  applyMaterialFilters,
+  getTotalQuantityInInventory,
+} from "../helpers";
 
 describe("Material filters helpers", () => {
+  describe("getTotalQuantityInInventory fn", () => {
+    it("returns true if material total inventory quantity is lesss than or equal to its minimum quantity", () => {
+      expect(getTotalQuantityInInventory(mockMaterialsData[0])).toBe(20);
+      expect(getTotalQuantityInInventory(mockMaterialsData[1])).toBe(10);
+      expect(getTotalQuantityInInventory(mockMaterialsData[2])).toBe(7);
+    });
+  });
+
   describe("isLowInventory fn", () => {
     it("returns true if material total inventory quantity is lesss than or equal to its minimum quantity", () => {
       const output = isLowInventory(mockMaterialsData[2]);

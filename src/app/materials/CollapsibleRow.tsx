@@ -6,6 +6,7 @@ import { Material, MaterialInventory } from "@/api/types/materials";
 import { Box, Sheet, Typography, Table, IconButton, Tooltip } from "@mui/joy";
 import { MaterialInventoryModal } from "./MaterialInventoryModal";
 import { AddCircleRounded } from "@mui/icons-material";
+import { format } from "date-fns";
 import "./styles.css";
 
 interface Props {
@@ -33,7 +34,7 @@ export const CollapsibleRow = (props: Props) => {
   return (
     <>
       <tr>
-        <td style={{ height: 0, padding: 0 }} colSpan={8}>
+        <td style={{ height: 0, padding: 0 }} colSpan={6}>
           <Sheet className="bg-slate-100 flex flex-col gap-y-2 p-3">
             <Box className="flex justify-between">
               <Typography level="body-lg" component="div">
@@ -60,17 +61,36 @@ export const CollapsibleRow = (props: Props) => {
                   <th>Lote</th>
                   <th>Quantidade</th>
                   <th>Validade</th>
+                  <th>Preço</th>
+                  <th>Data da compra</th>
                   <th />
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {props.material.lotes.map((materialInventory) => (
+                {props.material.inventory.map((materialInventory) => (
                   <tr key={materialInventory.lote}>
                     <td>{materialInventory.lote}</td>
                     <td>{materialInventory.quantity}</td>
-                    <td>{materialInventory.expDate}</td>
                     <td>
-                      <div>
+                      {format(
+                        new Date(materialInventory.expDate),
+                        "dd/MM/yyyy"
+                      )}
+                    </td>
+                    <td>
+                      {materialInventory.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </td>
+                    <td>
+                      {format(
+                        new Date(materialInventory.purchaseDate),
+                        "dd/MM/yyyy"
+                      )}
+                    </td>
+                    <td>
+                      <div className="flex justify-end">
                         <IconButton
                           size="sm"
                           className="no-bg-button gap-x-1"
