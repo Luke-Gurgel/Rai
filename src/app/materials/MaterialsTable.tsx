@@ -8,6 +8,7 @@ import { MaterialsTableRow } from "./MaterialsTableRow";
 import { LoadingTable } from "@/components/LoadingTable";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
 import { applyMaterialFilters } from "./helpers";
+import { EmptyTableRow } from "./EmptyTableRow";
 import { useAppSelector } from "@/store/hooks";
 
 export const MaterialsTable: React.FC = () => {
@@ -31,7 +32,7 @@ export const MaterialsTable: React.FC = () => {
       <MuiTable
         variant="outlined"
         borderAxis="xBetween"
-        hoverRow
+        hoverRow={!!filteredMaterials.length}
         sx={{
           "& tr > *:first-child": {
             position: "sticky",
@@ -54,14 +55,16 @@ export const MaterialsTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredMaterials.map((material) => (
-            <MaterialsTableRow
-              key={material.id}
-              material={material}
-              onEditButtonClick={() => setMaterialToEdit(material)}
-              onDeleteButtonClick={() => setMaterialToDelete(material)}
-            />
-          ))}
+          {!filteredMaterials.length && <EmptyTableRow />}
+          {!!filteredMaterials.length &&
+            filteredMaterials.map((material) => (
+              <MaterialsTableRow
+                key={material.id}
+                material={material}
+                onEditButtonClick={() => setMaterialToEdit(material)}
+                onDeleteButtonClick={() => setMaterialToDelete(material)}
+              />
+            ))}
         </tbody>
       </MuiTable>
       <MaterialModal
