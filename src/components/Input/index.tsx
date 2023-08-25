@@ -1,4 +1,4 @@
-import { forwardRef, RefObject } from "react";
+import { forwardRef } from "react";
 import MuiInput, { InputProps } from "@mui/joy/Input";
 import "./styles.css";
 

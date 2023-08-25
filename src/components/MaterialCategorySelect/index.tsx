@@ -1,22 +1,46 @@
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
+import { Controller } from "react-hook-form";
+import { InputMessage } from "@/components/InputMessage";
 import { MaterialCategory } from "@/api/types/materials";
-import { ComponentProps } from "react";
+import { FormControl, FormLabel, Select, Option } from "@mui/joy";
 
-interface Props extends ComponentProps<typeof Select> {
+interface Props {
+  formControl: any;
+  validationRules: any;
+  onChange: (value: MaterialCategory) => void;
   defaultValue?: MaterialCategory;
+  error?: string;
 }
 
-export const MaterialCategorySelect: React.FC<Props> = (props) => {
+export const MaterialCategorySelect = (props: Props) => {
   return (
-    <Select variant="outlined" {...props}>
-      {Object.entries(MaterialCategory).map(([key, val]) => {
-        return (
-          <Option key={key} value={key}>
-            {val}
-          </Option>
-        );
-      })}
-    </Select>
+    <FormControl error={!!props.error}>
+      <FormLabel>Categoria</FormLabel>
+      <Controller
+        name="category"
+        control={props.formControl}
+        rules={props.validationRules}
+        defaultValue={props.defaultValue}
+        render={() => (
+          <Select
+            variant="outlined"
+            placeholder="Categoria do material"
+            onChange={(e) => {
+              const value = (e?.target as HTMLInputElement)
+                .innerText as MaterialCategory;
+              props.onChange(value);
+            }}
+          >
+            {Object.entries(MaterialCategory).map(([key, val]) => {
+              return (
+                <Option key={key} value={val}>
+                  {val}
+                </Option>
+              );
+            })}
+          </Select>
+        )}
+      />
+      {props.error && <InputMessage message={props.error} />}
+    </FormControl>
   );
 };

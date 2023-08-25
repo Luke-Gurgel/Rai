@@ -5,6 +5,7 @@ import FormControl from "@mui/joy/FormControl";
 import { Material } from "@/api/types/materials";
 import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
 import { InputMessage } from "@/components/InputMessage";
+import { useMaterialForm } from "./useMaterialForm";
 import { Input } from "@/components/Input";
 
 interface Props {
@@ -12,58 +13,73 @@ interface Props {
 }
 
 export const MaterialForm = (props: Props) => {
+  const { form, schema } = useMaterialForm();
+
+  const onSubmit = (formData: Material) => {
+    console.log("formData", formData);
+  };
+
   return (
-    <form
-      onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-      }}
-    >
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <Stack spacing={2}>
-        <FormControl required>
+        <FormControl error={!!form.formState.errors.name}>
           <FormLabel>Nome</FormLabel>
           <Input
             autoFocus
-            required
             placeholder="Nome do material"
-            defaultValue={props.material?.name}
+            {...form.register("name", schema.get("name"))}
           />
-          {false && <InputMessage message="Esse campo é obrigatório" />}
+          {form.formState.errors.name && (
+            <InputMessage message={form.formState.errors.name.message} />
+          )}
         </FormControl>
-        <FormControl required>
-          <FormLabel>Categoria</FormLabel>
-          <MaterialCategorySelect
-            placeholder="Categoria do material"
-            defaultValue={props.material?.category}
-          />
-          {false && <InputMessage message="Esse campo é obrigatório" />}
-        </FormControl>
-        <FormControl required>
+        <MaterialCategorySelect
+          formControl={form.control}
+          defaultValue={props.material?.category}
+          validationRules={schema.get("category")}
+          error={form.formState.errors.category?.message}
+          onChange={(value) => {
+            form.setValue("category", value, {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
+          }}
+        />
+        <FormControl error={!!form.formState.errors.grupoQuimico}>
           <FormLabel>Grupo químico</FormLabel>
           <Input
-            required
             placeholder="Grupo químico do material"
-            defaultValue={props.material?.grupoQuimico}
+            {...form.register("grupoQuimico", schema.get("grupoQuimico"))}
           />
-          {false && <InputMessage message="Esse campo é obrigatório" />}
+          {form.formState.errors.grupoQuimico && (
+            <InputMessage
+              message={form.formState.errors.grupoQuimico.message}
+            />
+          )}
         </FormControl>
-        <FormControl required>
+        <FormControl error={!!form.formState.errors.principioAtivo}>
           <FormLabel>Princípio ativo</FormLabel>
           <Input
-            required
             placeholder="Princípio ativo do material"
-            defaultValue={props.material?.principioAtivo}
+            {...form.register("principioAtivo", schema.get("principioAtivo"))}
           />
-          {false && <InputMessage message="Esse campo é obrigatório" />}
+          {form.formState.errors.principioAtivo && (
+            <InputMessage
+              message={form.formState.errors.principioAtivo.message}
+            />
+          )}
         </FormControl>
-        <FormControl required>
+        <FormControl error={!!form.formState.errors.minQuantity}>
           <FormLabel>Quantidate mínima</FormLabel>
           <Input
-            required
             type="number"
             placeholder="Quantidade mínima"
-            defaultValue={props.material?.minQuantity}
+            {...form.register("minQuantity", schema.get("minQuantity"))}
           />
-          {false && <InputMessage message="Esse campo é obrigatório" />}
+          {form.formState.errors.minQuantity && (
+            <InputMessage message={form.formState.errors.minQuantity.message} />
+          )}
         </FormControl>
         <Button type="submit" className="bg-sky-500">
           {!!props.material ? "Atualizar" : "Registrar"}
