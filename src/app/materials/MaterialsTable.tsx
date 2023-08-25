@@ -21,8 +21,6 @@ export const MaterialsTable: React.FC = () => {
     return <LoadingTable />;
   }
 
-  console.log("filters", materialsState.filters);
-
   const filteredMaterials = applyMaterialFilters(
     materialsState.data,
     materialsState.filters

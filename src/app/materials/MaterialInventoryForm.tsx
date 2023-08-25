@@ -21,9 +21,7 @@ export const MaterialInventoryForm = (props: Props) => {
   };
 
   return (
-    <form
-      onSubmit={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
-    >
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <Stack spacing={2}>
         <FormControl error={!!form.formState.errors.lote}>
           <FormLabel>Lote</FormLabel>
