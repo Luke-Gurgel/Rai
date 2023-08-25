@@ -3,6 +3,7 @@ import { mockMaterialsData } from "__mocks__/materials";
 import {
   isLowInventory,
   applyMaterialFilters,
+  containsExpiredInventory,
   getTotalQuantityInInventory,
 } from "../helpers";
 
@@ -27,17 +28,49 @@ describe("Material filters helpers", () => {
     });
   });
 
+  describe("containsExpiredInventory fn", () => {
+    it("returns true if the inventory contains expired units", () => {
+      expect(containsExpiredInventory(mockMaterialsData[0])).toBe(false);
+      expect(containsExpiredInventory(mockMaterialsData[1])).toBe(true);
+      expect(containsExpiredInventory(mockMaterialsData[2])).toBe(false);
+    });
+  });
+
   describe("applyMaterialFilters fn", () => {
     it("returns filtered list with only materials that are low on inventory", () => {
       const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
         belowMinQuantity: true,
+        expired: false,
       });
-      expect(filteredMaterials).toEqual([mockMaterialsData[2]]);
+      expect(filteredMaterials).toEqual([
+        mockMaterialsData[2],
+        mockMaterialsData[3],
+      ]);
+    });
+
+    it("returns filtered list with only materials that have expired units in inventory", () => {
+      const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
+        belowMinQuantity: false,
+        expired: true,
+      });
+      expect(filteredMaterials).toEqual([
+        mockMaterialsData[1],
+        mockMaterialsData[3],
+      ]);
+    });
+
+    it("returns filtered list with both materials with expired units and low in inventory", () => {
+      const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
+        belowMinQuantity: true,
+        expired: true,
+      });
+      expect(filteredMaterials).toEqual([mockMaterialsData[3]]);
     });
 
     it("returns original list when no filter is applied", () => {
       const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
         belowMinQuantity: false,
+        expired: false,
       });
       expect(filteredMaterials).toEqual(mockMaterialsData);
     });

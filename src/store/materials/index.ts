@@ -5,6 +5,7 @@ import { mockMaterialsData } from "__mocks__/materials";
 
 export interface MaterialsFilters {
   belowMinQuantity: boolean;
+  expired: boolean;
 }
 
 interface MaterialsState {
@@ -16,6 +17,7 @@ const initialState: MaterialsState = {
   data: mockMaterialsData,
   filters: {
     belowMinQuantity: false,
+    expired: false,
   },
 };
 

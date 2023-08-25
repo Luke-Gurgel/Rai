@@ -14,7 +14,7 @@ import { useAppDispatch } from "@/store/hooks";
 export const MaterialFilters = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  const emptyFilters = { belowMinQuantity: false };
+  const emptyFilters = { belowMinQuantity: false, expired: false };
   const [filters, setFilters] = useState<MaterialsFilters>(emptyFilters);
 
   const onSubmit = (filters: MaterialsFilters) => {
@@ -41,15 +41,26 @@ export const MaterialFilters = () => {
           <FilterList />
         </MenuButton>
       </Tooltip>
-      <Menu variant="plain" size="md" placement="bottom-end">
+      <Menu variant="outlined" size="md" placement="bottom-end">
         <MenuItem>
           <Checkbox
             size="md"
             variant="outlined"
-            label="< quant. mín."
+            label="Baixo estoque"
             checked={filters.belowMinQuantity}
             onChange={(e) =>
               setFilters({ ...filters, belowMinQuantity: e.target.checked })
+            }
+          />
+        </MenuItem>
+        <MenuItem>
+          <Checkbox
+            size="md"
+            variant="outlined"
+            label="Expirados"
+            checked={filters.expired}
+            onChange={(e) =>
+              setFilters({ ...filters, expired: e.target.checked })
             }
           />
         </MenuItem>
