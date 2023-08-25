@@ -7,8 +7,8 @@ import { Material } from "@/api/types/materials";
 import { MaterialsTableRow } from "./MaterialsTableRow";
 import { LoadingTable } from "@/components/LoadingTable";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
-import { useAppSelector } from "@/store/hooks";
 import { applyMaterialFilters } from "./helpers";
+import { useAppSelector } from "@/store/hooks";
 
 export const MaterialsTable: React.FC = () => {
   const materialsState = useAppSelector((state) => state.materials);
@@ -20,6 +20,8 @@ export const MaterialsTable: React.FC = () => {
   if (!materialsState.data.length) {
     return <LoadingTable />;
   }
+
+  console.log("filters", materialsState.filters);
 
   const filteredMaterials = applyMaterialFilters(
     materialsState.data,

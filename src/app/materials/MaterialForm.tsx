@@ -1,10 +1,9 @@
-import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
+import Button from "@mui/joy/Button";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
-import { Material, MaterialCategory } from "@/api/types/materials";
+import { Material } from "@/api/types/materials";
+import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
 import { InputMessage } from "@/components/InputMessage";
 import { Input } from "@/components/Input";
 
@@ -32,19 +31,10 @@ export const MaterialForm = (props: Props) => {
         </FormControl>
         <FormControl required>
           <FormLabel>Categoria</FormLabel>
-          <Select
-            variant="outlined"
+          <MaterialCategorySelect
             placeholder="Categoria do material"
             defaultValue={props.material?.category}
-          >
-            {Object.entries(MaterialCategory).map(([key, val]) => {
-              return (
-                <Option key={key} value={key}>
-                  {val}
-                </Option>
-              );
-            })}
-          </Select>
+          />
           {false && <InputMessage message="Esse campo é obrigatório" />}
         </FormControl>
         <FormControl required>

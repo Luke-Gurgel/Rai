@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mockMaterialsData } from "__mocks__/materials";
+import { MaterialCategory } from "@/api/types/materials";
 import {
   isLowInventory,
   applyMaterialFilters,
@@ -39,8 +40,9 @@ describe("Material filters helpers", () => {
   describe("applyMaterialFilters fn", () => {
     it("returns filtered list with only materials that are low on inventory", () => {
       const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
-        belowMinQuantity: true,
         expired: false,
+        belowMinQuantity: true,
+        category: { checked: false },
       });
       expect(filteredMaterials).toEqual([
         mockMaterialsData[2],
@@ -50,8 +52,9 @@ describe("Material filters helpers", () => {
 
     it("returns filtered list with only materials that have expired units in inventory", () => {
       const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
-        belowMinQuantity: false,
         expired: true,
+        belowMinQuantity: false,
+        category: { checked: false },
       });
       expect(filteredMaterials).toEqual([
         mockMaterialsData[1],
@@ -61,16 +64,40 @@ describe("Material filters helpers", () => {
 
     it("returns filtered list with both materials with expired units and low in inventory", () => {
       const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
-        belowMinQuantity: true,
         expired: true,
+        belowMinQuantity: true,
+        category: { checked: false },
+      });
+      expect(filteredMaterials).toEqual([mockMaterialsData[3]]);
+    });
+
+    it("returns filtered list with materials for insects", () => {
+      const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
+        expired: false,
+        belowMinQuantity: false,
+        category: { checked: true, category: MaterialCategory.INSETO },
+      });
+      expect(filteredMaterials).toEqual([
+        mockMaterialsData[1],
+        mockMaterialsData[2],
+        mockMaterialsData[3],
+      ]);
+    });
+
+    it("returns filtered list with materials for insects with low inventory and expired units", () => {
+      const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
+        expired: true,
+        belowMinQuantity: true,
+        category: { checked: true, category: MaterialCategory.INSETO },
       });
       expect(filteredMaterials).toEqual([mockMaterialsData[3]]);
     });
 
     it("returns original list when no filter is applied", () => {
       const filteredMaterials = applyMaterialFilters(mockMaterialsData, {
-        belowMinQuantity: false,
         expired: false,
+        belowMinQuantity: false,
+        category: { checked: false },
       });
       expect(filteredMaterials).toEqual(mockMaterialsData);
     });

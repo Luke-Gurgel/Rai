@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Material } from "@/api/types/materials";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { Material, MaterialCategory } from "@/api/types/materials";
 import { mockMaterialsData } from "__mocks__/materials";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface MaterialsFilters {
   belowMinQuantity: boolean;
   expired: boolean;
+  category: {
+    checked: boolean;
+    category?: MaterialCategory;
+  };
 }
 
 interface MaterialsState {
@@ -13,12 +17,15 @@ interface MaterialsState {
   filters: MaterialsFilters;
 }
 
+export const emptyFilters: MaterialsFilters = {
+  belowMinQuantity: false,
+  expired: false,
+  category: { checked: false },
+};
+
 const initialState: MaterialsState = {
   data: mockMaterialsData,
-  filters: {
-    belowMinQuantity: false,
-    expired: false,
-  },
+  filters: emptyFilters,
 };
 
 const materialsSlice = createSlice({

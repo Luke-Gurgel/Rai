@@ -30,7 +30,9 @@ export const applyMaterialFilters = (
   return materials.filter((material) => {
     return (
       (!filters.belowMinQuantity || isLowInventory(material)) &&
-      (!filters.expired || containsExpiredInventory(material))
+      (!filters.expired || containsExpiredInventory(material)) &&
+      (!filters.category.checked ||
+        material.category === filters.category.category)
     );
   });
 };

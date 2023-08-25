@@ -6,15 +6,20 @@ import Checkbox from "@mui/joy/Checkbox";
 import MenuItem from "@mui/joy/MenuItem";
 import Dropdown from "@mui/joy/Dropdown";
 import MenuButton from "@mui/joy/MenuButton";
+import { useAppDispatch } from "@/store/hooks";
 import { FilterList } from "@mui/icons-material";
 import { Tooltip, IconButton, Button } from "@mui/joy";
-import { filterMaterials, MaterialsFilters } from "@/store/materials";
-import { useAppDispatch } from "@/store/hooks";
+import { MaterialCategory } from "@/api/types/materials";
+import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
+import {
+  emptyFilters,
+  filterMaterials,
+  MaterialsFilters,
+} from "@/store/materials";
 
 export const MaterialFilters = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  const emptyFilters = { belowMinQuantity: false, expired: false };
   const [filters, setFilters] = useState<MaterialsFilters>(emptyFilters);
 
   const onSubmit = (filters: MaterialsFilters) => {
@@ -61,6 +66,37 @@ export const MaterialFilters = () => {
             checked={filters.expired}
             onChange={(e) =>
               setFilters({ ...filters, expired: e.target.checked })
+            }
+          />
+        </MenuItem>
+        <MenuItem className="flex justify-center gap-x-2">
+          <Checkbox
+            size="md"
+            variant="outlined"
+            label="Categoria"
+            checked={filters.category.checked}
+            onChange={(e) =>
+              setFilters({
+                ...filters,
+                category: {
+                  checked: e.target.checked,
+                  category: filters.category.category,
+                },
+              })
+            }
+          />
+          <MaterialCategorySelect
+            size="sm"
+            sx={{ minWidth: 150 }}
+            defaultValue={filters.category.category}
+            onChange={(_, category) =>
+              setFilters({
+                ...filters,
+                category: {
+                  ...filters.category,
+                  category: category as MaterialCategory,
+                },
+              })
             }
           />
         </MenuItem>
