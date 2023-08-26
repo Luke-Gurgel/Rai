@@ -33,16 +33,6 @@ export const MaterialsTable: React.FC = () => {
         variant="outlined"
         borderAxis="xBetween"
         hoverRow={!!filteredMaterials.length}
-        sx={{
-          "& tr > *:first-child": {
-            position: "sticky",
-            left: 0,
-          },
-          "& tr > *:last-child": {
-            position: "sticky",
-            right: 0,
-          },
-        }}
       >
         <thead>
           <tr>
