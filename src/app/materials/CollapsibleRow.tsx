@@ -61,7 +61,7 @@ export const CollapsibleRow = (props: Props) => {
                   <th>Lote</th>
                   <th>Quantidade</th>
                   <th>Validade</th>
-                  <th>Preço</th>
+                  <th>Último preço</th>
                   <th>Data da compra</th>
                   <th />
                 </tr>
