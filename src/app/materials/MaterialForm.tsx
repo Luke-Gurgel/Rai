@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const MaterialForm = (props: Props) => {
-  const { form, schema } = useMaterialForm();
+  const { form, schema } = useMaterialForm(props.material);
 
   const onSubmit = (formData: Material) => {
     console.log("formData", formData);

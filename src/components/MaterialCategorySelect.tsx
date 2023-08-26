@@ -22,6 +22,7 @@ export const MaterialCategorySelect = (props: Props) => {
         defaultValue={props.defaultValue}
         render={() => (
           <Select
+            defaultValue={props.defaultValue}
             variant="outlined"
             placeholder="Categoria do material"
             onChange={(e) => {
