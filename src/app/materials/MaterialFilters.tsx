@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Menu from "@mui/joy/Menu";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 import Checkbox from "@mui/joy/Checkbox";
 import MenuItem from "@mui/joy/MenuItem";
 import Dropdown from "@mui/joy/Dropdown";
@@ -85,8 +87,9 @@ export const MaterialFilters = () => {
               })
             }
           />
-          <MaterialCategorySelect
+          <Select
             size="sm"
+            placeholder="Selecione"
             sx={{ minWidth: 150 }}
             defaultValue={filters.category.category}
             onChange={(_, category) =>
@@ -98,7 +101,15 @@ export const MaterialFilters = () => {
                 },
               })
             }
-          />
+          >
+            {Object.entries(MaterialCategory).map(([key, val]) => {
+              return (
+                <Option key={key} value={val}>
+                  {val}
+                </Option>
+              );
+            })}
+          </Select>
         </MenuItem>
         <MenuItem className="flex justify-center gap-x-4">
           <Button

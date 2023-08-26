@@ -36,13 +36,13 @@ export const ConfirmDeleteModal = (props: Props) => {
           sx={{ display: "flex", gap: 1, justifyContent: "flex-end", pt: 2 }}
         >
           <Button
-            className="bg-slate-400 hover:bg-red-300 text-white"
+            className="bg-slate-500 hover:bg-slate-400 text-white"
             onClick={props.close}
           >
             Cancelar
           </Button>
           <Button
-            className="bg-red-400 hover:bg-red-300 text-white"
+            className="bg-red-500 hover:bg-red-400 text-white"
             onClick={props.close}
           >
             Deletar material
