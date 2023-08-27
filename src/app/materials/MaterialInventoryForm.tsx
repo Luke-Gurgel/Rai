@@ -6,7 +6,6 @@ import FormControl from "@mui/joy/FormControl";
 import { InputMessage } from "@/components/InputMessage";
 import { Material, MaterialInventory } from "@/api/types/materials";
 import { useMaterialInventoryForm } from "./useMaterialInventoryForm";
-import { format } from "date-fns";
 
 interface Props {
   material: Material;

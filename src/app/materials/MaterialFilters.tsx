@@ -12,7 +12,6 @@ import { useAppDispatch } from "@/store/hooks";
 import { FilterList } from "@mui/icons-material";
 import { Tooltip, IconButton, Button } from "@mui/joy";
 import { MaterialCategory } from "@/api/types/materials";
-import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
 import {
   emptyFilters,
   filterMaterials,

@@ -1,3 +1,10 @@
+import { Stack } from "@mui/joy";
+import { ClientsTableHeader } from "./ClientsTableHeader";
+
 export default function ClientsPage() {
-  return <h1>Hello, Clients Page!</h1>;
+  return (
+    <Stack spacing={2}>
+      <ClientsTableHeader />
+    </Stack>
+  );
 }
