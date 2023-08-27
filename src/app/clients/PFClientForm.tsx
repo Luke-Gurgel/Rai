@@ -53,7 +53,9 @@ export const PFClientForm = (props: Props) => {
           )}
         </FormControl>
         <FormControl error={!!form.formState.errors.cpf}>
-          <FormLabel>CPF</FormLabel>
+          <FormLabel>
+            CPF <i>(somente dígitos)</i>
+          </FormLabel>
           <Input
             placeholder="CPF do cliente"
             {...form.register("cpf", schema.get("cpf"))}
@@ -73,7 +75,9 @@ export const PFClientForm = (props: Props) => {
           )}
         </FormControl>
         <FormControl error={!!form.formState.errors.tel}>
-          <FormLabel>Tel</FormLabel>
+          <FormLabel>
+            Tel <i>(com ddd)</i>
+          </FormLabel>
           <Input
             placeholder="tel do cliente"
             {...form.register("tel", schema.get("tel"))}

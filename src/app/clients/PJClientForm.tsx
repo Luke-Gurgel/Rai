@@ -63,7 +63,9 @@ export const PJClientForm = (props: Props) => {
           )}
         </FormControl>
         <FormControl error={!!form.formState.errors.cnpj}>
-          <FormLabel>CNPJ</FormLabel>
+          <FormLabel>
+            CNPJ <i>(somente dígitos)</i>
+          </FormLabel>
           <Input
             placeholder="CNPJ da empresa"
             {...form.register("cnpj", schema.get("cnpj"))}
@@ -83,7 +85,9 @@ export const PJClientForm = (props: Props) => {
           )}
         </FormControl>
         <FormControl error={!!form.formState.errors.tel}>
-          <FormLabel>Tel</FormLabel>
+          <FormLabel>
+            Tel <i>(com ddd)</i>
+          </FormLabel>
           <Input
             placeholder="tel do cliente"
             {...form.register("tel", schema.get("tel"))}
