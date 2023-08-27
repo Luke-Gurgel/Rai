@@ -20,5 +20,11 @@ describe("Address utils", () => {
       expect(formatCep(addressExample.cep)).toBe("41701-015");
       expect(formatCep(addressExample2.cep)).toBe("40150-140");
     });
+
+    it("returns an error string if the CEP is invalid", () => {
+      expect(formatCep("jdsajdsa")).toBe("cep inválido");
+      expect(formatCep("89032890421")).toBe("cep inválido");
+      expect(formatCep("8900")).toBe("cep inválido");
+    });
   });
 });

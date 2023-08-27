@@ -4,7 +4,7 @@ export const formatCep = (cep: string): string => {
   const cepDigits = cep.replace(/\D/g, "");
 
   if (cepDigits.length !== 8) {
-    throw new Error("CEP inválido");
+    return "cep inválido";
   }
 
   return cep.slice(0, 5) + "-" + cep.slice(5);

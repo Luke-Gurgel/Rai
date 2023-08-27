@@ -32,6 +32,10 @@ export function validateCnpj(cnpj: string) {
 }
 
 export const formatCnpj = (cnpj?: string): string | undefined => {
+  if (cnpj && !validateCnpj(cnpj)) {
+    return "CNPJ inválido";
+  }
+
   return cnpj?.replace(
     /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,
     "$1.$2.$3/$4-$5"

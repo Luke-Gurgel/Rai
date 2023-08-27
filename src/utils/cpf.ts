@@ -47,5 +47,9 @@ export function validateCpf(cpf: string) {
 }
 
 export const formatCpf = (cpf?: string): string | undefined => {
+  if (cpf && !validateCpf(cpf)) {
+    return "CPF inválido";
+  }
+
   return cpf?.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
 };
