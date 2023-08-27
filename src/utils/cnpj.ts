@@ -31,5 +31,9 @@ export function validateCnpj(cnpj: string) {
   }
 }
 
-const cnpj1 = "12.345.678/0001-23";
-const cnpj2 = "00.000.000/0000-00";
+export const formatCnpj = (cnpj?: string): string | undefined => {
+  return cnpj?.replace(
+    /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,
+    "$1.$2.$3/$4-$5"
+  );
+};

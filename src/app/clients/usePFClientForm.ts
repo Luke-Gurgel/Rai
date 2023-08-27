@@ -31,13 +31,15 @@ export const usePFClientForm = (defaultValues?: ClientPF): UsePFClientForm => {
   });
   schema.set("tel", {
     required: "Favor indicar o tel. do cliente",
-    minLength: { value: 10, message: "tel tem menos de 10 dígitos" },
-    maxLength: { value: 11, message: "tel tem mais de 11 dígitos" },
+    minLength: { value: 11, message: "Favor indicar um número válido" },
+    maxLength: { value: 11, message: "Favor indicar um número válido" },
     validate: {
+      missing9Prefix: (tel: string) => {
+        return tel.charAt(2) === "9" || "Adicione o 9 na frente do número";
+      },
       NaN: (val) => {
         return (
-          typeof val === "number" ||
-          "tel deve ser uma sequência de 10-11 números"
+          typeof val === "number" || "tel deve ser uma sequência de 11 números"
         );
       },
     },

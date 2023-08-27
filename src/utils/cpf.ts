@@ -46,6 +46,6 @@ export function validateCpf(cpf: string) {
   }
 }
 
-// Test the function
-const cpf1 = "123.456.789-09";
-const cpf2 = "111.222.333-44";
+export const formatCpf = (cpf?: string): string | undefined => {
+  return cpf?.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+};

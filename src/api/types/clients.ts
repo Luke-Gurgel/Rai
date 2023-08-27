@@ -2,7 +2,7 @@ export interface Address {
   street: string;
   number: number;
   neighborhood: string;
-  cep: number;
+  cep: string;
   city: string;
   state: string;
   complement?: string;
@@ -11,8 +11,8 @@ export interface Address {
 export interface ClientPF {
   id: number;
   name: string;
-  cpf: number;
-  tel: number;
+  cpf: string;
+  tel: string;
   email: string;
   address: Address;
 }
@@ -21,8 +21,8 @@ export interface ClientPJ {
   id: number;
   fantasyName: string;
   razaoSocial: string;
-  cnpj: number;
-  tel: number;
+  cnpj: string;
+  tel: string;
   email: string;
   address: Address;
 }
