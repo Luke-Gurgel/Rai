@@ -1,10 +1,11 @@
 export interface Address {
   street: string;
   number: number;
-  cep: number;
   neighborhood: string;
+  cep: number;
+  city: string;
+  state: string;
   complement?: string;
-  refPoint?: string;
 }
 
 export interface ClientPF {
