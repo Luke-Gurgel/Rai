@@ -7,8 +7,8 @@ import { Material } from "@/api/types/materials";
 import { MaterialsTableRow } from "./MaterialsTableRow";
 import { LoadingTable } from "@/components/LoadingTable";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
-import { applyMaterialFilters } from "./helpers";
-import { EmptyTableRow } from "./EmptyTableRow";
+import { applyMaterialFilters } from "./filters";
+import { EmptyTableRow } from "../../components/EmptyTableRow";
 import { useAppSelector } from "@/store/hooks";
 
 export const MaterialsTable: React.FC = () => {
@@ -45,7 +45,7 @@ export const MaterialsTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {!filteredMaterials.length && <EmptyTableRow />}
+          {!filteredMaterials.length && <EmptyTableRow colSpan={6} />}
           {!!filteredMaterials.length &&
             filteredMaterials.map((material) => (
               <MaterialsTableRow

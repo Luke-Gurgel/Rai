@@ -26,3 +26,5 @@ export interface ClientPJ {
   email: string;
   address: Address;
 }
+
+export type Client = ClientPF | ClientPJ;

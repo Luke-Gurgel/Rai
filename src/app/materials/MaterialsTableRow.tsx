@@ -8,7 +8,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { getTotalQuantityInInventory } from "./helpers";
+import { getTotalQuantityInInventory } from "./filters";
 import "./styles.css";
 
 interface Props {

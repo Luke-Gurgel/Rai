@@ -6,7 +6,7 @@ import {
   applyMaterialFilters,
   containsExpiredInventory,
   getTotalQuantityInInventory,
-} from "../helpers";
+} from "../filters";
 
 describe("Material filters helpers", () => {
   describe("getTotalQuantityInInventory fn", () => {
