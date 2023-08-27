@@ -172,7 +172,7 @@ export const PFClientForm = (props: Props) => {
           type="submit"
           className="bg-sky-500 w-1/3 text-base py-3 m-auto"
         >
-          Registrar
+          {props.client ? "Atualizar" : "Registrar"}
         </Button>
       </div>
     </form>

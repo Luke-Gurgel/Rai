@@ -8,14 +8,15 @@ import { Client, ClientPF, ClientPJ } from "@/api/types/clients";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { formatPhoneNumber } from "@/utils/phone";
+import { ClientModal } from "./ClientModal";
 
 interface Props {
   client: Client;
-  onEditButtonClick: () => void;
 }
 
 export const ClientsTableRow = (props: Props) => {
   const [isCollapsibleRowOpen, setIsCollapsibleRowOpen] = useState(false);
+  const [isClientModalOpen, setClientModalOpen] = useState(false);
 
   const pfClient: ClientPF = { ...(props.client as ClientPF) };
   const pjClient: ClientPJ = { ...(props.client as ClientPJ) };
@@ -52,7 +53,7 @@ export const ClientsTableRow = (props: Props) => {
               <IconButton
                 size="md"
                 className="no-bg-button"
-                onClick={props.onEditButtonClick}
+                onClick={() => setClientModalOpen(true)}
               >
                 <EditRoundedIcon fontSize="small" />
               </IconButton>
@@ -61,6 +62,11 @@ export const ClientsTableRow = (props: Props) => {
         </td>
       </tr>
       {isCollapsibleRowOpen && <CollapsibleRow client={props.client} />}
+      <ClientModal
+        client={props.client}
+        isOpen={isClientModalOpen}
+        close={() => setClientModalOpen(false)}
+      />
     </>
   );
 };

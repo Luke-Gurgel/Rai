@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Table as MuiTable } from "@mui/joy";
 import { LoadingTable } from "@/components/LoadingTable";
 import { EmptyTableRow } from "@/components/EmptyTableRow";
@@ -9,10 +8,6 @@ import { useAppSelector } from "@/store/hooks";
 
 export const ClientsTable: React.FC = () => {
   const clientsState = useAppSelector((state) => state.clients);
-  // const [materialToEdit, setMaterialToEdit] = useState<Material | null>(null);
-  // const [materialToDelete, setMaterialToDelete] = useState<Material | null>(
-  //   null
-  // );
 
   if (!clientsState.data.length) {
     return <LoadingTable />;
@@ -39,11 +34,7 @@ export const ClientsTable: React.FC = () => {
           {!clientsState.data.length && <EmptyTableRow colSpan={6} />}
           {!!clientsState.data.length &&
             clientsState.data.map((client) => (
-              <ClientsTableRow
-                key={client.id}
-                client={client}
-                onEditButtonClick={() => null}
-              />
+              <ClientsTableRow key={client.id} client={client} />
             ))}
         </tbody>
       </MuiTable>
