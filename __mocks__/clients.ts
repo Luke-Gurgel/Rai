@@ -1,6 +1,6 @@
 import { Client, ClientPF, ClientPJ, Address } from "@/api/types/clients";
 
-const addressExample: Address = {
+export const addressExample: Address = {
   street: "Rua Principal",
   number: 123,
   neighborhood: "Bairro Central",
@@ -10,7 +10,7 @@ const addressExample: Address = {
   complement: "Apartamento 4A",
 };
 
-const addressExample2: Address = {
+export const addressExample2: Address = {
   street: "Avenida Central",
   number: 456,
   neighborhood: "Bairro Novo",
@@ -19,7 +19,7 @@ const addressExample2: Address = {
   state: "SP",
 };
 
-const addressExample3: Address = {
+export const addressExample3: Address = {
   street: "Rua das Flores",
   number: 789,
   neighborhood: "Bairro Colorido",
@@ -29,7 +29,7 @@ const addressExample3: Address = {
   complement: "Casa Amarela",
 };
 
-const clientPFExample: ClientPF = {
+export const clientPFExample: ClientPF = {
   id: 1,
   name: "Fulano da Silva",
   cpf: "12345678900",
@@ -38,7 +38,7 @@ const clientPFExample: ClientPF = {
   address: addressExample,
 };
 
-const clientPJExample: ClientPJ = {
+export const clientPJExample: ClientPJ = {
   id: 2,
   fantasyName: "Empresa Fantástica",
   razaoSocial: "Razão Social Ltda.",
@@ -48,7 +48,7 @@ const clientPJExample: ClientPJ = {
   address: addressExample,
 };
 
-const clientPFExample2: ClientPF = {
+export const clientPFExample2: ClientPF = {
   id: 3,
   name: "Ciclana Souza",
   cpf: "98765432101",
@@ -57,7 +57,7 @@ const clientPFExample2: ClientPF = {
   address: addressExample2,
 };
 
-const clientPFExample3: ClientPF = {
+export const clientPFExample3: ClientPF = {
   id: 4,
   name: "Beltrano Oliveira",
   cpf: "54321678901",
@@ -66,7 +66,7 @@ const clientPFExample3: ClientPF = {
   address: addressExample3,
 };
 
-const clientPJExample2: ClientPJ = {
+export const clientPJExample2: ClientPJ = {
   id: 5,
   fantasyName: "Empreendimentos Real",
   razaoSocial: "Razão Real Ltda.",
@@ -76,7 +76,7 @@ const clientPJExample2: ClientPJ = {
   address: addressExample2,
 };
 
-const clientPJExample3: ClientPJ = {
+export const clientPJExample3: ClientPJ = {
   id: 6,
   fantasyName: "Comércio Vivo",
   razaoSocial: "Razão Viva Ltda.",

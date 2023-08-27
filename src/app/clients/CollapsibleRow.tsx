@@ -40,6 +40,14 @@ export const CollapsibleRow = (props: Props) => {
                   {formatAddress(props.client.address)}
                 </Typography>
               </Sheet>
+              {props.client.address.complement && (
+                <Sheet className="flex gap-x-2 divide-x py-2 border-double border-2">
+                  <Typography className="px-4 w-32">Complemento</Typography>
+                  <Typography className="px-4">
+                    {props.client.address.complement}
+                  </Typography>
+                </Sheet>
+              )}
             </Sheet>
           </Sheet>
         </td>
