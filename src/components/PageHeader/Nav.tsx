@@ -9,6 +9,7 @@ import Person from "@mui/icons-material/Person";
 import ListItemButton from "@mui/joy/ListItemButton";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
+import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import { usePathname } from "next/navigation";
 
@@ -17,6 +18,7 @@ export const Nav = () => {
 
   const isClientsPage = path.includes("clients");
   const isSchedulePage = path.includes("schedule");
+  const isServicesPage = path.includes("services");
   const isMaterialsPage = path.includes("materials");
 
   return (
@@ -47,6 +49,21 @@ export const Nav = () => {
                 </strong>
               ) : (
                 "Clientes"
+              )}
+            </ListItemButton>
+          </Link>
+        </ListItem>
+        <ListDivider />
+        <ListItem role="none">
+          <Link href="/services">
+            <ListItemButton role="menuitem" className="gap-x-2">
+              <DescriptionRoundedIcon fontSize="small" />
+              {isServicesPage ? (
+                <strong>
+                  <i>Serviços</i>
+                </strong>
+              ) : (
+                "Serviços"
               )}
             </ListItemButton>
           </Link>
