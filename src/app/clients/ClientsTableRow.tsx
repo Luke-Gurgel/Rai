@@ -27,7 +27,7 @@ export const ClientsTableRow = (props: Props) => {
 
   return (
     <>
-      <tr key={props.client.id}>
+      <tr>
         <td className="bg-slate-700">
           <IconButton
             size="sm"

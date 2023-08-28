@@ -7,9 +7,9 @@ import { ServicesTableRow } from "./ServicesTableRow";
 import { useAppSelector } from "@/store/hooks";
 
 export const ServicesTable: React.FC = () => {
-  const clientsState = useAppSelector((state) => state.clients);
+  const servicesState = useAppSelector((state) => state.services);
 
-  if (!clientsState.data.length) {
+  if (!servicesState.data.length) {
     return <LoadingTable />;
   }
 
@@ -18,23 +18,20 @@ export const ServicesTable: React.FC = () => {
       <MuiTable
         variant="outlined"
         borderAxis="xBetween"
-        hoverRow={!!clientsState.data.length}
+        hoverRow={!!servicesState.data.length}
       >
         <thead>
           <tr>
             <th style={{ width: 50 }} aria-label="empty" />
             <th>Nome</th>
-            <th>Email</th>
-            <th>Tel</th>
-            <th>Tipo</th>
             <th />
           </tr>
         </thead>
         <tbody>
-          {!clientsState.data.length && <EmptyTableRow colSpan={6} />}
-          {!!clientsState.data.length &&
-            clientsState.data.map((client) => (
-              <ServicesTableRow key={client.id} client={client} />
+          {!servicesState.data.length && <EmptyTableRow colSpan={6} />}
+          {!!servicesState.data.length &&
+            servicesState.data.map((service) => (
+              <ServicesTableRow key={service.id} service={service} />
             ))}
         </tbody>
       </MuiTable>

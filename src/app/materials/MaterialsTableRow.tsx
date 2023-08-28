@@ -26,7 +26,7 @@ export const MaterialsTableRow = (props: Props) => {
 
   return (
     <>
-      <tr key={props.material.id}>
+      <tr>
         <td className="bg-slate-700">
           <IconButton
             size="sm"

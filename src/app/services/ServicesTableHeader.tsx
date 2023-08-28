@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-// import { ClientModal } from "./ClientModal";
 import { AddCircleRounded } from "@mui/icons-material";
 import { Box, IconButton, Typography, Tooltip } from "@mui/joy";
 
 export const ServicesTableHeader = () => {
-  const [isClientModalOpen, setClientModalOpen] = useState(false);
+  const [isServiceModalOpen, setServiceModalOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -19,20 +18,16 @@ export const ServicesTableHeader = () => {
         Serviços
       </Typography>
       <div className="flex gap-x-2">
-        <Tooltip title="Registrar novo cliente" variant="soft" placement="top">
+        <Tooltip title="Registrar novo serviço" variant="soft" placement="top">
           <IconButton
             size="sm"
             color="neutral"
             variant="outlined"
-            onClick={() => setClientModalOpen(true)}
+            onClick={() => setServiceModalOpen(true)}
           >
             <AddCircleRounded />
           </IconButton>
         </Tooltip>
-        {/* <ClientModal
-          isOpen={isClientModalOpen}
-          close={() => setClientModalOpen(false)}
-        /> */}
       </div>
     </Box>
   );
