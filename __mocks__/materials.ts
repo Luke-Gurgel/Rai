@@ -90,4 +90,52 @@ export const mockMaterialsData: Material[] = [
       },
     ],
   },
+  {
+    id: 7,
+    name: "Fertilizers",
+    category: MaterialCategory.FERTILIZER,
+    minQuantity: 20,
+    grupoQuimico: "Nitrogen-based",
+    principioAtivo: "NPK blend",
+    inventory: [
+      {
+        lote: "NPK2345",
+        expDate: "2023-12-15",
+        purchaseDate: "2023-05-10",
+        price: 50,
+        quantity: 15,
+      },
+      {
+        lote: "NPK6789",
+        expDate: "2024-02-28",
+        purchaseDate: "2023-07-20",
+        price: 60,
+        quantity: 8,
+      },
+    ],
+  },
+  {
+    id: 12,
+    name: "Herbicides",
+    category: MaterialCategory.HERBICIDE,
+    minQuantity: 5,
+    grupoQuimico: "Glyphosate-based",
+    principioAtivo: "Glyphosate",
+    inventory: [
+      {
+        lote: "GLYPH123",
+        expDate: "2023-10-30",
+        purchaseDate: "2023-03-18",
+        price: 80,
+        quantity: 3,
+      },
+      {
+        lote: "GLYPH456",
+        expDate: "2024-05-15",
+        purchaseDate: "2023-09-02",
+        price: 85,
+        quantity: 6,
+      },
+    ],
+  },
 ];
