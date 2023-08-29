@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ServiceModal } from "./ServiceModal";
 import { AddCircleRounded } from "@mui/icons-material";
 import { Box, IconButton, Typography, Tooltip } from "@mui/joy";
 
@@ -29,6 +30,10 @@ export const ServicesTableHeader = () => {
           </IconButton>
         </Tooltip>
       </div>
+      <ServiceModal
+        isOpen={isServiceModalOpen}
+        close={() => setServiceModalOpen(false)}
+      />
     </Box>
   );
 };

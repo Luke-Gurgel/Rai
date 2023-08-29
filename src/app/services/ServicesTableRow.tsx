@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ServiceModal } from "./ServiceModal";
 import { IconButton, Tooltip } from "@mui/joy";
 import { Service } from "@/api/types/services";
 import { CollapsibleRow } from "./CollapsibleRow";
@@ -54,6 +55,11 @@ export const ServicesTableRow = (props: Props) => {
         </td>
       </tr>
       {isCollapsibleRowOpen && <CollapsibleRow service={props.service} />}
+      <ServiceModal
+        service={props.service}
+        isOpen={isServiceModalOpen}
+        close={() => setServiceModalOpen(false)}
+      />
     </>
   );
 };
