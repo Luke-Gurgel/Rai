@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Box, Typography, Button } from "@mui/joy";
-import { ClientModal } from "../clients/ClientModal";
 import { AddCircleRounded } from "@mui/icons-material";
+import { ServiceOrderModal } from "./ServiceOrderModal";
 
 export const ScheduleHeader = () => {
   const [isServiceOrderModalOpen, setServiceOrderModalOpen] = useState(false);
@@ -28,7 +28,7 @@ export const ScheduleHeader = () => {
         >
           Nova Ordem de Serviço
         </Button>
-        <ClientModal
+        <ServiceOrderModal
           isOpen={isServiceOrderModalOpen}
           close={() => setServiceOrderModalOpen(false)}
         />
