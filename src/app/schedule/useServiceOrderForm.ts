@@ -15,8 +15,7 @@ export const useServiceOrderForm = (
     defaultValues: {
       serviceId: defaultValues?.service?.id,
       clientId: defaultValues?.client?.id,
-      date: defaultValues?.date,
-      time: defaultValues?.time,
+      dateTime: defaultValues?.dateTime,
       warranty: defaultValues?.warranty,
       additionalInfo: defaultValues?.additionalInfo,
     },
@@ -30,26 +29,25 @@ export const useServiceOrderForm = (
 
   schema.set("clientId", { required: "Favor indicar o cliente" });
 
-  schema.set("date", {
+  schema.set("dateTime", {
     required: "Favor indicar quando o serviço será efetuado",
     validate: {
-      futureOnly: (date) => isFuture(date) || "Indique uma data futura",
-    },
-  });
-
-  schema.set("time", {
-    required: "Favor indicar quando o horário do serviço",
-    min: {
-      value: 7,
-      message: "Niguém merece trabalhar antes das 7h",
-    },
-    max: {
-      value: 18,
-      message: "Niguém merece trabalhar depois das 18h",
+      futureOnly: (dateTime: Date) => {
+        const date = new Date(dateTime);
+        return isFuture(date) || "Indique uma data futura";
+      },
+      businessHours: (dateTime) => {
+        const hours = new Date(dateTime).getHours();
+        return (
+          (hours >= 7 && hours < 18) ||
+          "Favor indicar um horário dentro do horário comercial"
+        );
+      },
     },
   });
 
   schema.set("warranty", {
+    valueAsNumber: true,
     required: "Favor indicar o período de garantia desse serviço",
     max: {
       value: 90,

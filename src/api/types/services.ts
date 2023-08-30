@@ -11,8 +11,7 @@ export interface ServiceOrder {
   id: number;
   service: Service;
   client: Client;
-  date: string;
-  time: number;
+  dateTime: string;
   warranty: number;
   additionalInfo: string;
 }

@@ -1,8 +1,7 @@
 export interface ServiceOrderFormStructure {
   serviceId: number;
   clientId: number;
-  date: string;
-  time: number;
+  dateTime: string;
   warranty: number;
   additionalInfo: string;
 }

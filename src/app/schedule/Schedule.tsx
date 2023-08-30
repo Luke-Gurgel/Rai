@@ -1,6 +1,6 @@
 "use client";
 
-import { Sheet } from "@mui/joy";
+import { Sheet, Typography } from "@mui/joy";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
@@ -14,8 +14,8 @@ export const Schedule = () => {
           <DateCalendar onChange={(val, state) => console.log(val, state)} />
         </LocalizationProvider>
       </Sheet>
-      <Sheet className="flex flex-1 h-80 justify-center items-center bg-slate-100">
-        Hey
+      <Sheet className="flex flex-1 h-80 py-8 px-4 bg-slate-300">
+        <Typography level="title-lg">Ordens de serviço para</Typography>
       </Sheet>
     </Sheet>
   );
