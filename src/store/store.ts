@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { serviceOrdersReducer } from "./serviceOrders";
 import { materialsReducer } from "./materials";
-import { clientsReducer } from "./clients";
 import { servicesReducer } from "./services";
+import { clientsReducer } from "./clients";
 
 export const store = configureStore({
   reducer: {
     clients: clientsReducer,
     services: servicesReducer,
+    serviceOrders: serviceOrdersReducer,
     materials: materialsReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
