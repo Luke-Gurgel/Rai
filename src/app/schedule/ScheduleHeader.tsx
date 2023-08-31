@@ -24,7 +24,7 @@ export const ScheduleHeader = () => {
           variant="soft"
           startDecorator={<AddCircleRounded />}
           onClick={() => setServiceOrderModalOpen(true)}
-          className="whitespace-nowrap bg-sky-900 hover:bg-sky-800 text-white"
+          className="whitespace-nowrap bg-slate-600 hover:bg-slate-700 text-white"
         >
           Nova Ordem de Serviço
         </Button>

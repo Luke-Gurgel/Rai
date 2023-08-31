@@ -26,7 +26,7 @@ export const Schedule = () => {
       <Sheet className="flex flex-1 flex-col gap-y-4 py-8 px-4 bg-slate-100">
         <Typography level="title-lg">
           Ordens de serviço para{" "}
-          <strong className="text-blue-700">
+          <strong className="text-slate-500">
             {selectedDate?.toLocaleDateString("pt-BR", { dateStyle: "full" })}
           </strong>
         </Typography>
