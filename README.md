@@ -36,7 +36,7 @@ Caso queira rodar testes de apenas um arquivo, basta passar o nome do mesmo, ex.
 
 ## Trabalhando com formulários
 
-Esse projeto usa a lib `react-hook-form` para administrar formulários e segue um padrão bem claro:
+Esse projeto usa a lib `react-hook-form` para administrar formulários e segue um padrão bem claro.
 
 - cada formulário tem sua própria custom hook, e.g. o `MaterialForm` tem uma hook `useMaterialForm`
 - a hook deve expor duas coisas, um `form` e um `schema`
