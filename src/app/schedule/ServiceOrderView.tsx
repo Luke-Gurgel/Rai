@@ -1,11 +1,23 @@
+"use client";
+
+import { useRef } from "react";
 import List from "@mui/joy/List";
 import { ServiceOrder } from "@/api/types/services";
-import { Stack, Modal, Typography, ModalDialog } from "@mui/joy";
 import { ClientPF, ClientPJ } from "@/api/types/clients";
+import PictureAsPdfRoundedIcon from "@mui/icons-material/PictureAsPdfRounded";
 import { formatPhoneNumber } from "@/utils/phone";
+import { useReactToPrint } from "react-to-print";
 import { formatAddress } from "@/utils/address";
 import { formatCnpj } from "@/utils/cnpj";
 import { formatCpf } from "@/utils/cpf";
+import {
+  Stack,
+  Modal,
+  Tooltip,
+  IconButton,
+  Typography,
+  ModalDialog,
+} from "@mui/joy";
 
 interface Props {
   isOpen: boolean;
@@ -17,6 +29,15 @@ export const ServiceOrderView: React.FC<Props> = (props) => {
   const pfClient: ClientPF = { ...(props.serviceOrder.client as ClientPF) };
   const pjClient: ClientPJ = { ...(props.serviceOrder.client as ClientPJ) };
   const [date, time] = props.serviceOrder.dateTime.split("T");
+
+  const componentRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    copyStyles: true,
+    documentTitle: `O.S-${props.serviceOrder.dateTime}-${
+      pfClient.cpf || pjClient.cnpj
+    }`,
+    content: () => componentRef?.current,
+  });
 
   return (
     <Modal open={props.isOpen} onClose={props.close}>
@@ -37,7 +58,18 @@ export const ServiceOrderView: React.FC<Props> = (props) => {
                 <i>Pressione ESC para fechar essa tela</i>
               </Typography>
             </div>
-            <div className="flex flex-col w-2/3 bg-slate-200 px-8 py-6 border-2 border-dotted border-slate-400">
+            <div ref={componentRef} className={`flex flex-col px-8 py-6`}>
+              <div className="flex justify-end">
+                <Tooltip title="Gerar pdf" placement="top" variant="soft">
+                  <IconButton
+                    size="md"
+                    className="no-bg-button"
+                    onClick={handlePrint}
+                  >
+                    <PictureAsPdfRoundedIcon fontSize="medium" />
+                  </IconButton>
+                </Tooltip>
+              </div>
               <Typography level="h3" className="text-slate-600">
                 <i>Serviço</i>
               </Typography>
