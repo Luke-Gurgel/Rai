@@ -77,6 +77,14 @@ export const ServiceOrderView: React.FC<Props> = (props) => {
                 {props.serviceOrder.service.name}{" "}
                 <i>{` (garantia de ${props.serviceOrder.warranty} dias)`}</i>
               </Typography>
+              <Typography level="title-lg" className="text-slate-600 mt-4">
+                <i>Materiais Necessários</i>
+              </Typography>
+              <Typography level="body-lg" className="mt-2">
+                {props.serviceOrder.service.materials
+                  .map((m) => m.name)
+                  .join(", ")}
+              </Typography>
               <Typography level="h3" className="text-slate-600 mt-4">
                 <i>Cliente</i>
               </Typography>
@@ -107,14 +115,6 @@ export const ServiceOrderView: React.FC<Props> = (props) => {
                 })}
                 {", "}
                 {"às"} {time}
-              </Typography>
-              <Typography level="h3" className="text-slate-600 mt-4">
-                <i>Materiais Necessários</i>
-              </Typography>
-              <Typography level="body-lg" className="mt-2">
-                {props.serviceOrder.service.materials
-                  .map((m) => m.name)
-                  .join(", ")}
               </Typography>
               <Typography level="h3" className="text-slate-600 mt-4">
                 <i>Informações Adicionais</i>
