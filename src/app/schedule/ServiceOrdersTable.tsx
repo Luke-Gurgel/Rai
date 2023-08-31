@@ -3,7 +3,6 @@
 import { Table as MuiTable } from "@mui/joy";
 import { ServiceOrdersTableRow } from "./ServiceOrdersTableRow";
 import { EmptyTableRow } from "@/components/EmptyTableRow";
-import { LoadingTable } from "@/components/LoadingTable";
 import { useAppSelector } from "@/store/hooks";
 import { isSameDay } from "date-fns";
 
@@ -21,7 +20,7 @@ export const ServiceOrdersTable: React.FC<Props> = (props) => {
   return (
     <MuiTable
       variant="soft"
-      borderAxis="bothBetween"
+      borderAxis="xBetween"
       hoverRow={!!serviceOrdersForSelectedDay.length}
       className="border-solid border-slate-300 border-2"
     >
