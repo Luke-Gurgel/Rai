@@ -35,6 +35,9 @@ const materialsSlice = createSlice({
     setMaterials(materialsState, action: PayloadAction<Material[]>) {
       materialsState.data = action.payload;
     },
+    registerMaterial(materialsState, action: PayloadAction<Material>) {
+      materialsState.data.push(action.payload);
+    },
     filterMaterials(materialsState, action: PayloadAction<MaterialsFilters>) {
       materialsState.filters = action.payload;
     },
@@ -42,4 +45,5 @@ const materialsSlice = createSlice({
 });
 
 export const { reducer: materialsReducer } = materialsSlice;
-export const { setMaterials, filterMaterials } = materialsSlice.actions;
+export const { setMaterials, registerMaterial, filterMaterials } =
+  materialsSlice.actions;

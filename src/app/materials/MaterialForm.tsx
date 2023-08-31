@@ -6,6 +6,8 @@ import { Material } from "@/api/types/materials";
 import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
 import { InputMessage } from "@/components/InputMessage";
 import { useMaterialForm } from "./useMaterialForm";
+import { registerMaterial } from "@/store/materials";
+import { useAppDispatch } from "@/store/hooks";
 import { Input } from "@/components/Input";
 
 interface Props {
@@ -14,9 +16,19 @@ interface Props {
 
 export const MaterialForm = (props: Props) => {
   const { form, schema } = useMaterialForm(props.material);
+  const dispatch = useAppDispatch();
+
+  function getId(): number {
+    return Math.floor(Math.random() * 200);
+  }
 
   const onSubmit = (formData: Material) => {
-    console.log("formData", formData);
+    // data has already been validated
+    // make API call to register the material
+    // if the call succeeds, the request will receive a response containing the material obj with
+    // id and inventory props (which are not present in formData)
+    // add it to the list in the store
+    dispatch(registerMaterial({ ...formData, id: getId(), inventory: [] }));
   };
 
   return (
