@@ -1,18 +1,23 @@
 import { useForm, RegisterOptions, UseFormReturn } from "react-hook-form";
-import { ClientPJ } from "@/api/types/clients";
+import { Client } from "@/api/types/clients";
 import { NestedKeyOf } from "@/utils/types";
 import { validateCnpj } from "@/utils/cnpj";
 
 interface UsePJClientForm {
-  form: UseFormReturn<ClientPJ>;
-  schema: Map<keyof ClientPJ | keyof NestedKeyOf<ClientPJ>, RegisterOptions>;
+  form: UseFormReturn<Client<"PJ">>;
+  schema: Map<
+    keyof Client<"PJ"> | keyof NestedKeyOf<Client<"PJ">>,
+    RegisterOptions
+  >;
 }
 
-export const usePJClientForm = (defaultValues?: ClientPJ): UsePJClientForm => {
-  const form = useForm<ClientPJ>({ defaultValues });
+export const usePJClientForm = (
+  defaultValues?: Client<"PJ">
+): UsePJClientForm => {
+  const form = useForm<Client<"PJ">>({ defaultValues });
 
   const schema = new Map<
-    keyof ClientPJ | keyof NestedKeyOf<ClientPJ>,
+    keyof Client<"PJ"> | keyof NestedKeyOf<Client<"PJ">>,
     RegisterOptions
   >();
 

@@ -9,22 +9,24 @@ export interface Address {
 }
 
 export interface ClientPF {
-  id: number;
+  type: "PF";
   name: string;
   cpf: string;
-  tel: string;
-  email: string;
-  address: Address;
 }
 
 export interface ClientPJ {
-  id: number;
+  type: "PJ";
   fantasyName: string;
   razaoSocial: string;
   cnpj: string;
+}
+
+export type ClientType = "PF" | "PJ" | unknown;
+
+export type Client<ClientType> = {
+  id: number;
   tel: string;
   email: string;
   address: Address;
-}
-
-export type Client = ClientPF | ClientPJ;
+  type: ClientType;
+} & (ClientPF | ClientPJ);

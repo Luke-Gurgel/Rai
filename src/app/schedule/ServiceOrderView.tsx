@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import List from "@mui/joy/List";
 import { ServiceOrder } from "@/api/types/services";
-import { ClientPF, ClientPJ } from "@/api/types/clients";
 import PictureAsPdfRoundedIcon from "@mui/icons-material/PictureAsPdfRounded";
 import { formatPhoneNumber } from "@/utils/phone";
 import { useReactToPrint } from "react-to-print";
@@ -26,17 +25,14 @@ interface Props {
 }
 
 export const ServiceOrderView: React.FC<Props> = (props) => {
-  const pfClient: ClientPF = { ...(props.serviceOrder.client as ClientPF) };
-  const pjClient: ClientPJ = { ...(props.serviceOrder.client as ClientPJ) };
+  const { client } = props.serviceOrder;
   const [date, time] = props.serviceOrder.dateTime.split("T");
 
   const componentRef = useRef(null);
   const handlePrint = useReactToPrint({
     copyStyles: true,
-    documentTitle: `O.S-${props.serviceOrder.dateTime}-${
-      pfClient.cpf || pjClient.cnpj
-    }`,
     content: () => componentRef?.current,
+    documentTitle: `O.S-${props.serviceOrder.dateTime}`,
   });
 
   return (
@@ -89,9 +85,10 @@ export const ServiceOrderView: React.FC<Props> = (props) => {
                 <i>Cliente</i>
               </Typography>
               <Typography level="body-lg" className="mt-2">
-                {pfClient.name || pjClient.fantasyName} {" - "}
-                {pfClient.cpf && <>cpf {formatCpf(pfClient.cpf)}</>}
-                {pjClient.cnpj && <>cnpj {formatCnpj(pjClient.cnpj)}</>}
+                {client.type === "PF" && `${client.name} - `}
+                {client.type === "PJ" && `${client.fantasyName} - `}
+                {client.type === "PF" && <>cpf {formatCpf(client.cpf)}</>}
+                {client.type === "PJ" && <>cnpj {formatCnpj(client.cnpj)}</>}
               </Typography>
               <Typography level="title-lg" className="text-slate-600 mt-2">
                 <i>Endereço</i>

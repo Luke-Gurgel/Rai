@@ -1,7 +1,7 @@
 import { Service, ServiceOrder } from "@/api/types/services";
+import { clientPFExample, clientPJExample } from "./clients";
 import { MaterialCategory } from "@/api/types/materials";
 import { mockMaterialsData } from "./materials";
-import { clientPFExample, clientPJExample } from "./clients";
 
 export const mockServices: Service[] = [
   {

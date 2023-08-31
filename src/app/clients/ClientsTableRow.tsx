@@ -1,25 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { Client } from "@/api/types/clients";
 import { IconButton, Tooltip } from "@mui/joy";
 import { CollapsibleRow } from "./CollapsibleRow";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import { Client, ClientPF, ClientPJ } from "@/api/types/clients";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { formatPhoneNumber } from "@/utils/phone";
 import { ClientModal } from "./ClientModal";
 
 interface Props {
-  client: Client;
+  client: Client<unknown>;
 }
 
-export const ClientsTableRow = (props: Props) => {
+export const ClientsTableRow = ({ client }: Props) => {
   const [isCollapsibleRowOpen, setIsCollapsibleRowOpen] = useState(false);
   const [isClientModalOpen, setClientModalOpen] = useState(false);
-
-  const pfClient: ClientPF = { ...(props.client as ClientPF) };
-  const pjClient: ClientPJ = { ...(props.client as ClientPJ) };
 
   const toggleCollapsibleRow = () => {
     setIsCollapsibleRowOpen(!isCollapsibleRowOpen);
@@ -43,10 +40,13 @@ export const ClientsTableRow = (props: Props) => {
             )}
           </IconButton>
         </td>
-        <td>{pfClient.name || pjClient.fantasyName}</td>
-        <td>{props.client.email}</td>
-        <td>{formatPhoneNumber(props.client.tel)}</td>
-        <td>{pfClient.cpf ? "PF" : "PJ"}</td>
+        <td>
+          {client.type === "PF" && client.name}
+          {client.type === "PJ" && client.fantasyName}
+        </td>
+        <td>{client.email}</td>
+        <td>{formatPhoneNumber(client.tel)}</td>
+        <td>{client.type}</td>
         <td>
           <div className="flex justify-end">
             <Tooltip title="Editar cliente" placement="top" variant="soft">
@@ -61,9 +61,9 @@ export const ClientsTableRow = (props: Props) => {
           </div>
         </td>
       </tr>
-      {isCollapsibleRowOpen && <CollapsibleRow client={props.client} />}
+      {isCollapsibleRowOpen && <CollapsibleRow client={client} />}
       <ClientModal
-        client={props.client}
+        client={client}
         isOpen={isClientModalOpen}
         close={() => setClientModalOpen(false)}
       />

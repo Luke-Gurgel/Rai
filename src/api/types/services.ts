@@ -10,7 +10,7 @@ export interface Service {
 export interface ServiceOrder {
   id: number;
   service: Service;
-  client: Client;
+  client: Client<unknown>;
   dateTime: string;
   warranty: number;
   additionalInfo: string;

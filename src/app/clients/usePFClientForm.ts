@@ -1,18 +1,23 @@
 import { useForm, RegisterOptions, UseFormReturn } from "react-hook-form";
-import { ClientPF } from "@/api/types/clients";
+import { Client } from "@/api/types/clients";
 import { NestedKeyOf } from "@/utils/types";
 import { validateCpf } from "@/utils/cpf";
 
 interface UsePFClientForm {
-  form: UseFormReturn<ClientPF>;
-  schema: Map<keyof ClientPF | keyof NestedKeyOf<ClientPF>, RegisterOptions>;
+  form: UseFormReturn<Client<"PF">>;
+  schema: Map<
+    keyof Client<"PF"> | keyof NestedKeyOf<Client<"PF">>,
+    RegisterOptions
+  >;
 }
 
-export const usePFClientForm = (defaultValues?: ClientPF): UsePFClientForm => {
-  const form = useForm<ClientPF>({ defaultValues });
+export const usePFClientForm = (
+  defaultValues?: Client<"PF">
+): UsePFClientForm => {
+  const form = useForm<Client<"PF">>({ defaultValues });
 
   const schema = new Map<
-    keyof ClientPF | keyof NestedKeyOf<ClientPF>,
+    keyof Client<"PF"> | keyof NestedKeyOf<Client<"PF">>,
     RegisterOptions
   >();
 

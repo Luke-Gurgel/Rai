@@ -11,7 +11,7 @@ export interface ClientsFilters {
 }
 
 interface ClientsState {
-  data: Client[];
+  data: Client<unknown>[];
   filters: ClientsFilters;
 }
 
@@ -28,7 +28,7 @@ const clientsSlice = createSlice({
   name: "clients",
   initialState,
   reducers: {
-    setClients(clientsState, action: PayloadAction<Client[]>) {
+    setClients(clientsState, action: PayloadAction<Client<unknown>[]>) {
       clientsState.data = action.payload;
     },
     filterClients(clientsState, action: PayloadAction<ClientsFilters>) {

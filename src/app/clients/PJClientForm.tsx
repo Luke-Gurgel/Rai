@@ -2,23 +2,23 @@ import Button from "@mui/joy/Button";
 import { Input } from "@/components/Input";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
-import { ClientPJ } from "@/api/types/clients";
+import { Client } from "@/api/types/clients";
 import { usePJClientForm } from "./usePJClientForm";
 import { InputMessage } from "@/components/InputMessage";
 import { Typography } from "@mui/joy";
 
 interface Props {
-  client?: ClientPJ;
+  client?: Client<"PJ">;
 }
 
 export const PJClientForm = (props: Props) => {
   const { form, schema } = usePJClientForm(props.client);
 
-  const onSubmit = (formData: ClientPJ) => {
+  const onSubmit = (formData: Client<"PJ">) => {
     console.log("formData", formData);
   };
 
-  const fetchAddressFromCEP = (e) => {
+  const fetchAddressFromCEP = (e: any) => {
     const cep = e.target.value.replace(/\D/g, "");
     if (!cep) return;
 

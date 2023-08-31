@@ -1,10 +1,10 @@
 import { Controller } from "react-hook-form";
 import { InputMessage } from "@/components/InputMessage";
-import { Client, ClientPF, ClientPJ } from "@/api/types/clients";
 import { FormControl, FormLabel, Select, Option } from "@mui/joy";
+import { Client } from "@/api/types/clients";
 
 interface Props {
-  options: Client[];
+  options: Client<unknown>[];
   formControl: any;
   validationRules: any;
   onChange: (valu: number | null) => void;
@@ -29,12 +29,10 @@ export const ClientSelect = (props: Props) => {
             onChange={(_, value) => props.onChange(value)}
           >
             {props.options.map((client) => {
-              const cnpj = (client as ClientPJ)?.cnpj;
               return (
                 <Option key={client.id} value={client.id}>
-                  {cnpj
-                    ? (client as ClientPJ).fantasyName
-                    : (client as ClientPF).name}
+                  {client.type === "PF" && client.name}
+                  {client.type === "PJ" && client.fantasyName}
                 </Option>
               );
             })}

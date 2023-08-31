@@ -2,20 +2,22 @@
 
 import { useState } from "react";
 import List from "@mui/joy/List";
+import { Client } from "@/api/types/clients";
 import { PFClientForm } from "./PFClientForm";
 import { PJClientForm } from "./PJClientForm";
-import { Client, ClientPJ, ClientPF } from "@/api/types/clients";
 import { Stack, Modal, Checkbox, Typography, ModalDialog } from "@mui/joy";
 
 interface Props {
-  client?: Client;
+  client?: Client<unknown>;
   isOpen: boolean;
   close: () => void;
 }
 
 export const ClientModal = (props: Props) => {
-  const cnpj = (props.client as ClientPJ)?.cnpj;
-  const [clientType, setClientType] = useState<"PF" | "PJ">(cnpj ? "PJ" : "PF");
+  const isClientPJ = props.client?.type === "PJ";
+  const [clientType, setClientType] = useState<"PF" | "PJ">(
+    isClientPJ ? "PJ" : "PF"
+  );
 
   return (
     <Modal open={props.isOpen} onClose={props.close}>
@@ -55,10 +57,10 @@ export const ClientModal = (props: Props) => {
               )}
             </div>
             {clientType === "PF" && (
-              <PFClientForm client={props.client as ClientPF} />
+              <PFClientForm client={props.client as Client<"PF">} />
             )}
             {clientType === "PJ" && (
-              <PJClientForm client={props.client as ClientPJ} />
+              <PJClientForm client={props.client as Client<"PJ">} />
             )}
           </Stack>
         </List>

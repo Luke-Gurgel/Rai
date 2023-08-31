@@ -6,7 +6,6 @@ import { ServiceOrder } from "@/api/types/services";
 import { ServiceOrderModal } from "./ServiceOrderModal";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
-import { ClientPF, ClientPJ } from "@/api/types/clients";
 import { ServiceOrderView } from "./ServiceOrderView";
 
 interface Props {
@@ -17,14 +16,16 @@ export const ServiceOrdersTableRow = (props: Props) => {
   const [isServiceOrderModalOpen, setServiceOrderModalOpen] = useState(false);
   const [isServiceOrderViewOpen, setServiceOrderViewOpen] = useState(false);
 
-  const pfClient: ClientPF = { ...(props.serviceOrder.client as ClientPF) };
-  const pjClient: ClientPJ = { ...(props.serviceOrder.client as ClientPJ) };
+  const { client } = props.serviceOrder;
   const [, time] = props.serviceOrder.dateTime.split("T");
 
   return (
     <>
       <tr>
-        <td>{pfClient.name || pjClient.fantasyName}</td>
+        <td>
+          {client.type === "PF" && client.name}
+          {client.type === "PJ" && client.fantasyName}
+        </td>
         <td>{props.serviceOrder.service.name}</td>
         <td>{time}</td>
         <td>

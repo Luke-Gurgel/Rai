@@ -1,17 +1,14 @@
 import { Sheet, Typography } from "@mui/joy";
-import { Client, ClientPF, ClientPJ } from "@/api/types/clients";
 import { formatAddress } from "@/utils/address";
+import { Client } from "@/api/types/clients";
 import { formatCnpj } from "@/utils/cnpj";
 import { formatCpf } from "@/utils/cpf";
 
 interface Props {
-  client: Client;
+  client: Client<unknown>;
 }
 
-export const CollapsibleRow = (props: Props) => {
-  const pfClient: ClientPF = { ...(props.client as ClientPF) };
-  const pjClient: ClientPJ = { ...(props.client as ClientPJ) };
-
+export const CollapsibleRow = ({ client }: Props) => {
   return (
     <>
       <tr>
@@ -20,31 +17,30 @@ export const CollapsibleRow = (props: Props) => {
             <Sheet className="flex flex-col border-double border-2">
               <Sheet className="flex gap-x-2 divide-x py-2 border-double border-2">
                 <Typography className="px-4 w-32">
-                  {pfClient.cpf ? "CPF" : "CNPJ"}
+                  {client.type === "PF" ? "CPF" : "CNPJ"}
                 </Typography>
                 <Typography className="px-4">
-                  {formatCpf(pfClient.cpf) || formatCnpj(pjClient.cnpj)}
+                  {client.type === "PF" && formatCpf(client.cpf)}
+                  {client.type === "PJ" && formatCnpj(client.cnpj)}
                 </Typography>
               </Sheet>
-              {pjClient.cnpj && (
+              {client.type === "PJ" && (
                 <Sheet className="flex gap-x-2 divide-x py-2 border-double border-2">
                   <Typography className="px-4 w-32">Razão Social</Typography>
-                  <Typography className="px-4">
-                    {pjClient.razaoSocial}
-                  </Typography>
+                  <Typography className="px-4">{client.razaoSocial}</Typography>
                 </Sheet>
               )}
               <Sheet className="flex gap-x-2 divide-x py-2 border-double border-2">
                 <Typography className="px-4 w-32">Endereço</Typography>
                 <Typography className="px-4">
-                  {formatAddress(props.client.address)}
+                  {formatAddress(client.address)}
                 </Typography>
               </Sheet>
-              {props.client.address.complement && (
+              {client.address.complement && (
                 <Sheet className="flex gap-x-2 divide-x py-2 border-double border-2">
                   <Typography className="px-4 w-32">Complemento</Typography>
                   <Typography className="px-4">
-                    {props.client.address.complement}
+                    {client.address.complement}
                   </Typography>
                 </Sheet>
               )}

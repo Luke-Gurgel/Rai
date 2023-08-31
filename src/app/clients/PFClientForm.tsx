@@ -3,22 +3,22 @@ import { Typography } from "@mui/joy";
 import { Input } from "@/components/Input";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
-import { ClientPF } from "@/api/types/clients";
+import { Client } from "@/api/types/clients";
 import { usePFClientForm } from "./usePFClientForm";
 import { InputMessage } from "@/components/InputMessage";
 
 interface Props {
-  client?: ClientPF;
+  client?: Client<"PF">;
 }
 
 export const PFClientForm = (props: Props) => {
   const { form, schema } = usePFClientForm(props.client);
 
-  const onSubmit = (formData: ClientPF) => {
+  const onSubmit = (formData: Client<"PF">) => {
     console.log("formData", formData);
   };
 
-  const fetchAddressFromCEP = (e) => {
+  const fetchAddressFromCEP = (e: any) => {
     const cep = e.target.value.replace(/\D/g, "");
     if (!cep) return;
 
