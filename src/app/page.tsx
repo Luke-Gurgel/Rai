@@ -5,6 +5,28 @@ export default function Home() {
     <div className="flex flex-col">
       <Typography level="h2">To Do</Typography>
       <Typography level="h4" className="mt-2">
+        Formato do nome do arquivo pdf da O.S
+      </Typography>
+      <li className="ml-4">
+        <Typography level="body-md">
+          O formato que eles querem é O.S-numeração-nome-dataThorario <br />
+          Para criar essa numeração temos que buscar o ID da ultima ordem de
+          serviço e somar 1
+        </Typography>
+      </li>
+      <Typography level="h4" className="mt-2">
+        Categorias
+      </Typography>
+      <li className="ml-4">
+        <Typography level="body-md">
+          Seria bom poder categorizar os serviços tbm, ex.: RATO, INSETO, etc.
+          <br />A gente poderia mudar a entidade MaterialCategory para Categoria
+          pq ela vai se aplicar tanto aos serviços quanto aos materiais. <br />
+          No momento, ela so tem uma propriedade, nome, mas ela poderia ter uma
+          outra chamada applicableTo que seria do tipo service | material | all
+        </Typography>
+      </li>
+      <Typography level="h4" className="mt-2">
         Schedule
       </Typography>
       <li className="ml-4">
