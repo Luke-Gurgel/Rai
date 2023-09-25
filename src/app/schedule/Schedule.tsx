@@ -1,16 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { ptBR } from "date-fns/locale";
 import { Sheet, Typography } from "@mui/joy";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { useServiceOrders } from "@/hooks/useServiceOrders";
 import { ServiceOrdersTable } from "./ServiceOrdersTable";
-import { ptBR } from "date-fns/locale";
+import { useServices } from "@/hooks/useServices";
 
 export const Schedule = () => {
   const today = new Date();
-  const [selectedDate, setSelectedDate] = useState<Date>(today);
+  const [selectedDay, setSelectedDay] = useState<number>(today.getDate());
+  const [selectedMonth, setSelectedMonth] = useState<number>(today.getMonth());
+  const [selectedYear, setSelectedYear] = useState<number>(today.getFullYear());
+  useServiceOrders(selectedMonth, selectedYear);
+  useServices();
+
+  const selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
 
   return (
     <Sheet className="w-full max-h-96 flex">
@@ -18,7 +26,11 @@ export const Schedule = () => {
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
           <DateCalendar
             onChange={(date: Date | null) => {
-              if (date) setSelectedDate(date);
+              if (date) {
+                setSelectedDay(date.getDate());
+                setSelectedMonth(date.getMonth());
+                setSelectedYear(date.getFullYear());
+              }
             }}
           />
         </LocalizationProvider>

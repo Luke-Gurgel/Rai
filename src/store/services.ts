@@ -1,14 +1,13 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { Service } from "@/api/types/services";
-import { mockServices } from "__mocks__/services";
 
 interface ServicesState {
   data: Service[];
 }
 
 const initialState: ServicesState = {
-  data: mockServices,
+  data: [],
 };
 
 const servicesSlice = createSlice({

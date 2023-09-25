@@ -1,16 +1,13 @@
-import { Client } from "./clients";
-import { Material } from "./materials";
-
 export interface Service {
-  id: number;
+  serviceId: number;
   name: string;
-  materials: Material[];
+  materialIds: number[];
 }
 
 export interface ServiceOrder {
-  id: number;
-  service: Service;
-  client: Client<unknown>;
+  serviceOrderId: number;
+  serviceId: number;
+  clientId: number;
   dateTime: string;
   warranty: number;
   additionalInfo: string;
