@@ -1,5 +1,4 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { mockClients } from "__mocks__/clients";
 import { createSlice } from "@reduxjs/toolkit";
 import { Client } from "@/api/types/clients";
 
@@ -20,7 +19,7 @@ export const emptyFilters: ClientsFilters = {
 };
 
 const initialState: ClientsState = {
-  data: mockClients,
+  data: [],
   filters: emptyFilters,
 };
 
