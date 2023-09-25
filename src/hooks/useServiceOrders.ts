@@ -3,6 +3,7 @@ import { useAppSelector } from "@/store/hooks";
 import { useAppDispatch } from "@/store/hooks";
 import { setServiceOrders } from "@/store/serviceOrders";
 import { fetchServiceOrders } from "@/api/requests/services";
+import { toast } from "sonner";
 
 interface Args {
   year: number;
@@ -16,7 +17,7 @@ export const useServiceOrders = ({ month, year }: Args) => {
   useEffect(() => {
     fetchServiceOrders(month, year)
       .then((serviceOrders) => dispatch(setServiceOrders(serviceOrders)))
-      .catch((e) => console.log(e));
+      .catch((e) => toast.error("Failed to fetch Service Orders: ", e.message));
   }, [month, year, dispatch]);
 
   return { serviceOrders };
