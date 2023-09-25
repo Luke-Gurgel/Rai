@@ -24,7 +24,7 @@ export interface ClientPJ {
 export type ClientType = "PF" | "PJ" | unknown;
 
 export type Client<ClientType> = {
-  id: number;
+  clientId: number;
   tel: string;
   email: string;
   address: Address;

@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import List from "@mui/joy/List";
-import { ServiceOrder } from "@/api/types/services";
+import { Service, ServiceOrder } from "@/api/types/services";
 import PictureAsPdfRoundedIcon from "@mui/icons-material/PictureAsPdfRounded";
 import { formatPhoneNumber } from "@/utils/phone";
 import { useReactToPrint } from "react-to-print";
 import { formatAddress } from "@/utils/address";
+import { Client } from "@/api/types/clients";
 import { formatCnpj } from "@/utils/cnpj";
 import { formatCpf } from "@/utils/cpf";
 import {
@@ -21,11 +22,12 @@ import {
 interface Props {
   isOpen: boolean;
   serviceOrder: ServiceOrder;
+  client: Client<unknown>;
+  service: Service;
   close: () => void;
 }
 
 export const ServiceOrderView: React.FC<Props> = (props) => {
-  const { client } = props.serviceOrder;
   const [date, time] = props.serviceOrder.dateTime.split("T");
 
   const componentRef = useRef(null);
@@ -70,38 +72,39 @@ export const ServiceOrderView: React.FC<Props> = (props) => {
                 <i>Serviço</i>
               </Typography>
               <Typography level="body-lg" className="mt-2">
-                {props.serviceOrder.service.name}{" "}
+                {props.service.name}{" "}
                 <i>{` (garantia de ${props.serviceOrder.warranty} dias)`}</i>
               </Typography>
               <Typography level="title-lg" className="text-slate-600 mt-4">
                 <i>Materiais Necessários</i>
               </Typography>
               <Typography level="body-lg" className="mt-2">
-                {props.serviceOrder.service.materials
-                  .map((m) => m.name)
-                  .join(", ")}
+                {/* {props.service.materials.map((m) => m.name).join(", ")} */}
               </Typography>
               <Typography level="h3" className="text-slate-600 mt-4">
                 <i>Cliente</i>
               </Typography>
               <Typography level="body-lg" className="mt-2">
-                {client.type === "PF" && `${client.name} - `}
-                {client.type === "PJ" && `${client.fantasyName} - `}
-                {client.type === "PF" && <>cpf {formatCpf(client.cpf)}</>}
-                {client.type === "PJ" && <>cnpj {formatCnpj(client.cnpj)}</>}
+                {props.client.type === "PF" && `${props.client.name} - `}
+                {props.client.type === "PJ" && `${props.client.fantasyName} - `}
+                {props.client.type === "PF" && (
+                  <>cpf {formatCpf(props.client.cpf)}</>
+                )}
+                {props.client.type === "PJ" && (
+                  <>cnpj {formatCnpj(props.client.cnpj)}</>
+                )}
               </Typography>
               <Typography level="title-lg" className="text-slate-600 mt-2">
                 <i>Endereço</i>
               </Typography>
               <Typography level="body-lg">
-                {formatAddress(props.serviceOrder.client.address)}
+                {formatAddress(props.client.address)}
               </Typography>
               <Typography level="title-lg" className="text-slate-600 mt-2">
                 <i>Contato</i>
               </Typography>
               <Typography level="body-lg">
-                {props.serviceOrder.client.email} |{" "}
-                {formatPhoneNumber(props.serviceOrder.client.tel)}
+                {props.client.email} | {formatPhoneNumber(props.client.tel)}
               </Typography>
               <Typography level="h3" className="text-slate-600 mt-4">
                 <i>Data e Horário</i>

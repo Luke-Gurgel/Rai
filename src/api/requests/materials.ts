@@ -7,7 +7,7 @@ const materialCategoryUrl = env.apiUrl + "/material-categories";
 
 export const fetchMaterials = async (): Promise<Material[]> => {
   const res = await fetch(materialsUrl);
-  const { materials }: { materials: Material[] } = await res.json();
+  const materials: Material[] = await res.json();
   return materials;
 };
 

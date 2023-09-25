@@ -7,13 +7,17 @@ import {
   fetchMaterialCategories,
 } from "@/api/requests/materials";
 
-export const useMaterials = () => {
+interface Args {
+  fetch?: boolean;
+}
+
+export const useMaterials = ({ fetch }: Args) => {
   const dispatch = useAppDispatch();
   const materials = useAppSelector((state) => state.materials.data);
   const categories = useAppSelector((state) => state.materials.categories);
 
   useEffect(() => {
-    if (!materials.length) {
+    if (fetch && !materials.length) {
       fetchMaterials()
         .then((materials) => dispatch(setMaterials(materials)))
         .catch((e) => console.log(e));
@@ -22,7 +26,7 @@ export const useMaterials = () => {
         .then((categories) => dispatch(setCategories(categories)))
         .catch((e) => console.log(e));
     }
-  }, [dispatch, materials.length]);
+  }, [fetch, materials.length, dispatch]);
 
   return { materials, categories };
 };

@@ -8,15 +8,19 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { useServiceOrders } from "@/hooks/useServiceOrders";
 import { ServiceOrdersTable } from "./ServiceOrdersTable";
+import { useMaterials } from "@/hooks/useMaterials";
 import { useServices } from "@/hooks/useServices";
+import { useClients } from "@/hooks/useClients";
 
 export const Schedule = () => {
   const today = new Date();
   const [selectedDay, setSelectedDay] = useState<number>(today.getDate());
   const [selectedMonth, setSelectedMonth] = useState<number>(today.getMonth());
   const [selectedYear, setSelectedYear] = useState<number>(today.getFullYear());
-  useServiceOrders(selectedMonth, selectedYear);
-  useServices();
+  useServiceOrders({ month: selectedMonth, year: selectedYear });
+  useMaterials({ fetch: true });
+  useServices({ fetch: true });
+  useClients({ fetch: true });
 
   const selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
 

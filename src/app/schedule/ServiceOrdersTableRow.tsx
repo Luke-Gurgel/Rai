@@ -7,17 +7,26 @@ import { ServiceOrderModal } from "./ServiceOrderModal";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
 import { ServiceOrderView } from "./ServiceOrderView";
+import { useServices } from "@/hooks/useServices";
+import { useClients } from "@/hooks/useClients";
 
 interface Props {
   serviceOrder: ServiceOrder;
 }
 
-export const ServiceOrdersTableRow = (props: Props) => {
+export const ServiceOrdersTableRow = ({ serviceOrder }: Props) => {
+  const { services } = useServices({ fetch: false });
+  const { clients } = useClients({ fetch: false });
   const [isServiceOrderModalOpen, setServiceOrderModalOpen] = useState(false);
   const [isServiceOrderViewOpen, setServiceOrderViewOpen] = useState(false);
 
-  const { client } = props.serviceOrder;
-  const [, time] = props.serviceOrder.dateTime.split("T");
+  const [client] = clients.filter(
+    (client) => client.clientId === serviceOrder.clientId
+  );
+  const [service] = services.filter(
+    (service) => service.serviceId === serviceOrder.serviceId
+  );
+  const [, time] = serviceOrder.dateTime.split("T");
 
   return (
     <>
@@ -26,7 +35,7 @@ export const ServiceOrdersTableRow = (props: Props) => {
           {client.type === "PF" && client.name}
           {client.type === "PJ" && client.fantasyName}
         </td>
-        <td>{props.serviceOrder.service.name}</td>
+        <td>{service.name}</td>
         <td>{time}</td>
         <td>
           <div className="flex justify-end">
@@ -61,12 +70,14 @@ export const ServiceOrdersTableRow = (props: Props) => {
       </tr>
       <ServiceOrderModal
         isOpen={isServiceOrderModalOpen}
-        serviceOrder={props.serviceOrder}
+        serviceOrder={serviceOrder}
         close={() => setServiceOrderModalOpen(false)}
       />
       <ServiceOrderView
         isOpen={isServiceOrderViewOpen}
-        serviceOrder={props.serviceOrder}
+        serviceOrder={serviceOrder}
+        service={service}
+        client={client}
         close={() => setServiceOrderViewOpen(false)}
       />
     </>

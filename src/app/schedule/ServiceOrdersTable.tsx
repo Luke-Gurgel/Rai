@@ -36,7 +36,7 @@ export const ServiceOrdersTable: React.FC<Props> = (props) => {
         {!serviceOrdersForSelectedDay.length && <EmptyTableRow colSpan={4} />}
         {!!serviceOrdersForSelectedDay.length &&
           serviceOrdersForSelectedDay.map((so) => (
-            <ServiceOrdersTableRow key={so.id} serviceOrder={so} />
+            <ServiceOrdersTableRow key={so.serviceOrderId} serviceOrder={so} />
           ))}
       </tbody>
     </MuiTable>

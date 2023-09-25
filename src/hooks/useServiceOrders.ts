@@ -4,7 +4,12 @@ import { useAppDispatch } from "@/store/hooks";
 import { setServiceOrders } from "@/store/serviceOrders";
 import { fetchServiceOrders } from "@/api/requests/services";
 
-export const useServiceOrders = (month: number, year: number) => {
+interface Args {
+  year: number;
+  month: number;
+}
+
+export const useServiceOrders = ({ month, year }: Args) => {
   const dispatch = useAppDispatch();
   const serviceOrders = useAppSelector((state) => state.serviceOrders.data);
 

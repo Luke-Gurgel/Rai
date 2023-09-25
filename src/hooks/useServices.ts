@@ -4,17 +4,21 @@ import { useAppDispatch } from "@/store/hooks";
 import { setServices } from "@/store/services";
 import { fetchServices } from "@/api/requests/services";
 
-export const useServices = () => {
+interface Args {
+  fetch?: boolean;
+}
+
+export const useServices = ({ fetch }: Args) => {
   const dispatch = useAppDispatch();
   const services = useAppSelector((state) => state.services.data);
 
   useEffect(() => {
-    if (!services.length) {
+    if (fetch && !services.length) {
       fetchServices()
         .then((services) => dispatch(setServices(services)))
         .catch((e) => console.log(e));
     }
-  }, [dispatch, services.length]);
+  }, [fetch, services.length, dispatch]);
 
   return { services };
 };

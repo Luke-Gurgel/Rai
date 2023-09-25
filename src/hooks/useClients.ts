@@ -4,17 +4,21 @@ import { useAppDispatch } from "@/store/hooks";
 import { fetchClients } from "@/api/requests/clients";
 import { setClients } from "@/store/clients";
 
-export const useClients = () => {
+interface Args {
+  fetch?: boolean;
+}
+
+export const useClients = ({ fetch }: Args) => {
   const dispatch = useAppDispatch();
   const clients = useAppSelector((state) => state.clients.data);
 
   useEffect(() => {
-    if (!clients.length) {
+    if (fetch && !clients.length) {
       fetchClients()
         .then((clients) => dispatch(setClients(clients)))
         .catch((e) => console.log(e));
     }
-  }, [dispatch, clients.length]);
+  }, [clients.length, fetch, dispatch]);
 
   return { clients };
 };

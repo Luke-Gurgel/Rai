@@ -16,6 +16,6 @@ export const fetchServiceOrders = async (
 
 export const fetchServices = async (): Promise<Service[]> => {
   const res = await fetch(servicesUrl);
-  const { services }: { services: Service[] } = await res.json();
+  const services: Service[] = await res.json();
   return services;
 };
