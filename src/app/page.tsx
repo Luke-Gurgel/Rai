@@ -20,10 +20,11 @@ export default function Home() {
       <li className="ml-4">
         <Typography level="body-md">
           Seria bom poder categorizar os serviços tbm, ex.: RATO, INSETO, etc.
-          <br />A gente poderia mudar a entidade MaterialCategory para Categoria
-          pq ela vai se aplicar tanto aos serviços quanto aos materiais. <br />
-          No momento, ela so tem uma propriedade, nome, mas ela poderia ter uma
-          outra chamada applicableTo que seria do tipo service | material | all
+          <br />
+          Ao listar os serviços, podemos pegar a(s) categoria(s) dos materiais e
+          categorizar o serviço tbm
+          <br />E na hora de criar uma nova S.O o select dos serviços poderia
+          ser grupado
         </Typography>
       </li>
       <Typography level="h4" className="mt-2">
