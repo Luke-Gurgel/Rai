@@ -22,3 +22,8 @@ const servicesSlice = createSlice({
 
 export const { reducer: servicesReducer } = servicesSlice;
 export const { setServices } = servicesSlice.actions;
+
+export const getServiceById = (id: number, services: Service[]) => {
+  const [service] = services.filter((service) => service.serviceId === id);
+  return service;
+};

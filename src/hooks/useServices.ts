@@ -5,21 +5,15 @@ import { setServices } from "@/store/services";
 import { fetchServices } from "@/api/requests/services";
 import { toast } from "sonner";
 
-interface Args {
-  fetch?: boolean;
-}
-
-export const useServices = ({ fetch }: Args) => {
+export const useServices = () => {
   const dispatch = useAppDispatch();
   const services = useAppSelector((state) => state.services.data);
 
   useEffect(() => {
-    if (fetch && !services.length) {
+    if (!services.length) {
       fetchServices()
         .then((services) => dispatch(setServices(services)))
         .catch((e) => toast.error("Failed to fetch services. " + e));
     }
-  }, [fetch, services.length, dispatch]);
-
-  return { services };
+  }, [services.length, dispatch]);
 };

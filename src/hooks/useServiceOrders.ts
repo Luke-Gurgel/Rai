@@ -5,12 +5,7 @@ import { setServiceOrders } from "@/store/serviceOrders";
 import { fetchServiceOrders } from "@/api/requests/services";
 import { toast } from "sonner";
 
-interface Args {
-  year: number;
-  month: number;
-}
-
-export const useServiceOrders = ({ month, year }: Args) => {
+export const useServiceOrders = (month: number, year: number) => {
   const dispatch = useAppDispatch();
   const serviceOrders = useAppSelector((state) => state.serviceOrders.data);
 

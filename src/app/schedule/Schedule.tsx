@@ -17,10 +17,10 @@ export const Schedule = () => {
   const [selectedDay, setSelectedDay] = useState<number>(today.getDate());
   const [selectedMonth, setSelectedMonth] = useState<number>(today.getMonth());
   const [selectedYear, setSelectedYear] = useState<number>(today.getFullYear());
-  useServiceOrders({ month: selectedMonth, year: selectedYear });
-  useMaterials({ fetch: true });
-  useServices({ fetch: true });
-  useClients({ fetch: true });
+  useServiceOrders(selectedMonth, selectedYear);
+  useMaterials();
+  useServices();
+  useClients();
 
   const selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
 

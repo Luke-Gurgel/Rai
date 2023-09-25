@@ -5,21 +5,15 @@ import { fetchClients } from "@/api/requests/clients";
 import { setClients } from "@/store/clients";
 import { toast } from "sonner";
 
-interface Args {
-  fetch?: boolean;
-}
-
-export const useClients = ({ fetch }: Args) => {
+export const useClients = () => {
   const dispatch = useAppDispatch();
   const clients = useAppSelector((state) => state.clients.data);
 
   useEffect(() => {
-    if (fetch && !clients.length) {
+    if (!clients.length) {
       fetchClients()
         .then((clients) => dispatch(setClients(clients)))
         .catch((e) => toast.error("Failed to fetch clients. " + e));
     }
-  }, [clients.length, fetch, dispatch]);
-
-  return { clients };
+  }, [clients.length, dispatch]);
 };

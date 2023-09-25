@@ -38,3 +38,11 @@ const clientsSlice = createSlice({
 
 export const { reducer: clientsReducer } = clientsSlice;
 export const { setClients, filterClients } = clientsSlice.actions;
+
+export const getClientById = (
+  id: number,
+  clients: Client<unknown>[]
+): Client<unknown> => {
+  const [client] = clients.filter((client) => client.clientId === id);
+  return client;
+};

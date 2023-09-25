@@ -7,25 +7,22 @@ import { ServiceOrderModal } from "./ServiceOrderModal";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
 import { ServiceOrderView } from "./ServiceOrderView";
-import { useServices } from "@/hooks/useServices";
-import { useClients } from "@/hooks/useClients";
+import { getServiceById } from "@/store/services";
+import { getClientById } from "@/store/clients";
+import { useAppSelector } from "@/store/hooks";
 
 interface Props {
   serviceOrder: ServiceOrder;
 }
 
 export const ServiceOrdersTableRow = ({ serviceOrder }: Props) => {
-  const { services } = useServices({ fetch: false });
-  const { clients } = useClients({ fetch: false });
-  const [isServiceOrderModalOpen, setServiceOrderModalOpen] = useState(false);
+  const clients = useAppSelector((state) => state.clients.data);
+  const services = useAppSelector((state) => state.services.data);
   const [isServiceOrderViewOpen, setServiceOrderViewOpen] = useState(false);
+  const [isServiceOrderModalOpen, setServiceOrderModalOpen] = useState(false);
 
-  const [client] = clients.filter(
-    (client) => client.clientId === serviceOrder.clientId
-  );
-  const [service] = services.filter(
-    (service) => service.serviceId === serviceOrder.serviceId
-  );
+  const service = getServiceById(serviceOrder.serviceId, services);
+  const client = getClientById(serviceOrder.clientId, clients);
   const [, time] = serviceOrder.dateTime.split("T");
 
   return (
