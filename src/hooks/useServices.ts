@@ -3,6 +3,7 @@ import { useAppSelector } from "@/store/hooks";
 import { useAppDispatch } from "@/store/hooks";
 import { setServices } from "@/store/services";
 import { fetchServices } from "@/api/requests/services";
+import { toast } from "sonner";
 
 interface Args {
   fetch?: boolean;
@@ -16,7 +17,7 @@ export const useServices = ({ fetch }: Args) => {
     if (fetch && !services.length) {
       fetchServices()
         .then((services) => dispatch(setServices(services)))
-        .catch((e) => console.log(e));
+        .catch((e) => toast.error("Failed to fetch services. " + e));
     }
   }, [fetch, services.length, dispatch]);
 

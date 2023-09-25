@@ -3,6 +3,7 @@ import { useAppSelector } from "@/store/hooks";
 import { useAppDispatch } from "@/store/hooks";
 import { fetchClients } from "@/api/requests/clients";
 import { setClients } from "@/store/clients";
+import { toast } from "sonner";
 
 interface Args {
   fetch?: boolean;
@@ -16,7 +17,7 @@ export const useClients = ({ fetch }: Args) => {
     if (fetch && !clients.length) {
       fetchClients()
         .then((clients) => dispatch(setClients(clients)))
-        .catch((e) => console.log(e));
+        .catch((e) => toast.error("Failed to fetch clients. " + e));
     }
   }, [clients.length, fetch, dispatch]);
 

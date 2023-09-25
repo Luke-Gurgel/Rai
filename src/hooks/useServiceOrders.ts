@@ -17,7 +17,7 @@ export const useServiceOrders = ({ month, year }: Args) => {
   useEffect(() => {
     fetchServiceOrders(month, year)
       .then((serviceOrders) => dispatch(setServiceOrders(serviceOrders)))
-      .catch((e) => toast.error("Failed to fetch Service Orders: ", e.message));
+      .catch((e) => toast.error("Failed to fetch service orders. " + e));
   }, [month, year, dispatch]);
 
   return { serviceOrders };
