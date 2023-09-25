@@ -1,8 +1,6 @@
-export enum MaterialCategory {
-  RATO = "RATO",
-  INSETO = "INSETO",
-  FERTILIZER = "FERTILIZER",
-  HERBICIDE = "HERBICIDE",
+export interface MaterialCategory {
+  categoryId: number;
+  name: string;
 }
 
 export interface MaterialInventory {
@@ -19,6 +17,6 @@ export interface Material {
   minQuantity: number;
   grupoQuimico: string;
   principioAtivo: string;
-  category: MaterialCategory;
+  categoryId: number;
   inventory: MaterialInventory[];
 }
