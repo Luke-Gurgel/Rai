@@ -36,12 +36,7 @@ export const useMaterialInventoryForm = (
   });
 
   schema.set("price", {
-    valueAsNumber: true,
     required: "Favor indicar a preço da compra",
-    min: {
-      value: 1,
-      message: "Quantidade dever maior que zero",
-    },
   });
 
   schema.set("purchaseDate", {
