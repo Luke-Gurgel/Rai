@@ -1,17 +1,21 @@
+"use client";
+
 import { Controller } from "react-hook-form";
+import { useAppSelector } from "@/store/hooks";
 import { InputMessage } from "@/components/InputMessage";
-import { MaterialCategory } from "@/api/types/materials";
 import { FormControl, FormLabel, Select, Option } from "@mui/joy";
 
 interface Props {
   formControl: any;
   validationRules: any;
-  onChange: (value: MaterialCategory) => void;
-  defaultValue?: MaterialCategory;
+  onChange: (value: string | null) => void;
+  defaultValue?: string;
   error?: string;
 }
 
 export const MaterialCategorySelect = (props: Props) => {
+  const { categories } = useAppSelector((state) => state.materials);
+
   return (
     <FormControl error={!!props.error}>
       <FormLabel>Categoria</FormLabel>
@@ -22,22 +26,16 @@ export const MaterialCategorySelect = (props: Props) => {
         defaultValue={props.defaultValue}
         render={() => (
           <Select
-            defaultValue={props.defaultValue}
             variant="outlined"
+            defaultValue={props.defaultValue}
             placeholder="Categoria do material"
-            onChange={(e) => {
-              const value = (e?.target as HTMLInputElement)
-                .innerText as MaterialCategory;
-              props.onChange(value);
-            }}
+            onChange={(_, category) => props.onChange(category)}
           >
-            {Object.entries(MaterialCategory).map(([key, val]) => {
-              return (
-                <Option key={key} value={val}>
-                  {val}
-                </Option>
-              );
-            })}
+            {categories.map((category) => (
+              <Option key={category.categoryId} value={category.name}>
+                {category.name}
+              </Option>
+            ))}
           </Select>
         )}
       />

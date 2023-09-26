@@ -1,5 +1,6 @@
 import { useForm, RegisterOptions, UseFormReturn } from "react-hook-form";
-import { Material, MaterialCategory } from "@/api/types/materials";
+import { Material } from "@/api/types/materials";
+import { useAppSelector } from "@/store/hooks";
 
 interface UseMaterialForm {
   form: UseFormReturn<Material>;
@@ -7,6 +8,7 @@ interface UseMaterialForm {
 }
 
 export const useMaterialForm = (defaultValues?: Material): UseMaterialForm => {
+  const { categories } = useAppSelector((state) => state.materials);
   const form = useForm<Material>({ defaultValues });
 
   const schema = new Map<keyof Material, RegisterOptions>();
@@ -18,7 +20,7 @@ export const useMaterialForm = (defaultValues?: Material): UseMaterialForm => {
     validate: {
       options: (value) => {
         return (
-          Object.values(MaterialCategory).some((opt) => opt === `${value}`) ||
+          categories.some((category) => category.name === `${value}`) ||
           "Favor selecionar uma dentre as categorias disponíveis"
         );
       },

@@ -8,10 +8,9 @@ import Checkbox from "@mui/joy/Checkbox";
 import MenuItem from "@mui/joy/MenuItem";
 import Dropdown from "@mui/joy/Dropdown";
 import MenuButton from "@mui/joy/MenuButton";
-import { useAppDispatch } from "@/store/hooks";
 import { FilterList } from "@mui/icons-material";
 import { Tooltip, IconButton, Button } from "@mui/joy";
-import { MaterialCategory } from "@/api/types/materials";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   emptyFilters,
   filterMaterials,
@@ -21,6 +20,7 @@ import {
 export const MaterialFilters = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
+  const { categories } = useAppSelector((state) => state.materials);
   const [filters, setFilters] = useState<MaterialsFilters>(emptyFilters);
 
   const onSubmit = (filters: MaterialsFilters) => {
@@ -96,18 +96,16 @@ export const MaterialFilters = () => {
                 ...filters,
                 category: {
                   ...filters.category,
-                  category: category as MaterialCategory,
+                  category,
                 },
               })
             }
           >
-            {Object.entries(MaterialCategory).map(([key, val]) => {
-              return (
-                <Option key={key} value={val}>
-                  {val}
-                </Option>
-              );
-            })}
+            {categories.map((category) => (
+              <Option key={category.categoryId} value={category.name}>
+                {category.name}
+              </Option>
+            ))}
           </Select>
         </MenuItem>
         <MenuItem className="flex justify-center gap-x-4">

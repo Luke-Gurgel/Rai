@@ -10,11 +10,12 @@ import {
 
 export const useMaterials = () => {
   const dispatch = useAppDispatch();
-  const materials = useAppSelector((state) => state.materials.data);
-  const categories = useAppSelector((state) => state.materials.categories);
+  const { data, categories, filters } = useAppSelector(
+    (state) => state.materials
+  );
 
   useEffect(() => {
-    if (!materials.length) {
+    if (!data.length) {
       fetchMaterials()
         .then((materials) => dispatch(setMaterials(materials)))
         .catch((e) => toast.error("Failed to fetch materials. " + e));
@@ -23,5 +24,7 @@ export const useMaterials = () => {
         .then((categories) => dispatch(setCategories(categories)))
         .catch((e) => toast.error("Failed to fetch material categories. " + e));
     }
-  }, [materials.length, dispatch]);
+  }, [data.length, dispatch]);
+
+  return { materials: data, categories, filters };
 };

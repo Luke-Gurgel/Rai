@@ -4,6 +4,7 @@ export interface MaterialCategory {
 }
 
 export interface MaterialInventory {
+  inventoryId: number;
   lote: string;
   expDate: string;
   quantity: number;
@@ -12,11 +13,11 @@ export interface MaterialInventory {
 }
 
 export interface Material {
-  id: number;
+  materialId: number;
   name: string;
   minQuantity: number;
   grupoQuimico: string;
   principioAtivo: string;
-  categoryId: number;
+  category: string;
   inventory: MaterialInventory[];
 }

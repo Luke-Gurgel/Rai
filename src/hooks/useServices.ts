@@ -16,4 +16,6 @@ export const useServices = () => {
         .catch((e) => toast.error("Failed to fetch services. " + e));
     }
   }, [services.length, dispatch]);
+
+  return { services };
 };

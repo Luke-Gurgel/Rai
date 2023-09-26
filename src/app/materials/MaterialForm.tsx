@@ -18,17 +18,9 @@ export const MaterialForm = (props: Props) => {
   const { form, schema } = useMaterialForm(props.material);
   const dispatch = useAppDispatch();
 
-  function getId(): number {
-    return Math.floor(Math.random() * 200);
-  }
-
   const onSubmit = (formData: Material) => {
-    // data has already been validated
-    // make API call to register the material
-    // if the call succeeds, the request will receive a response containing the material obj with
-    // id and inventory props (which are not present in formData)
-    // add it to the list in the store
-    dispatch(registerMaterial({ ...formData, id: getId(), inventory: [] }));
+    console.log(formData);
+    // dispatch(registerMaterial({ ...formData, inventory: [] }));
   };
 
   return (
@@ -50,12 +42,13 @@ export const MaterialForm = (props: Props) => {
           defaultValue={props.material?.category}
           validationRules={schema.get("category")}
           error={form.formState.errors.category?.message}
-          onChange={(value) => {
-            form.setValue("category", value, {
-              shouldDirty: true,
-              shouldTouch: true,
-              shouldValidate: true,
-            });
+          onChange={(category) => {
+            if (category)
+              form.setValue("category", category, {
+                shouldDirty: true,
+                shouldTouch: true,
+                shouldValidate: true,
+              });
           }}
         />
         <FormControl error={!!form.formState.errors.grupoQuimico}>

@@ -16,4 +16,6 @@ export const useClients = () => {
         .catch((e) => toast.error("Failed to fetch clients. " + e));
     }
   }, [clients.length, dispatch]);
+
+  return { clients };
 };

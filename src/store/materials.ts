@@ -7,7 +7,7 @@ export interface MaterialsFilters {
   expired: boolean;
   category: {
     checked: boolean;
-    category?: MaterialCategory;
+    category?: string | null;
   };
 }
 
