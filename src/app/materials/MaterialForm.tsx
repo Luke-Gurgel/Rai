@@ -1,26 +1,51 @@
+"use client";
+
+import { useState } from "react";
 import Stack from "@mui/joy/Stack";
 import Button from "@mui/joy/Button";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
 import { Material } from "@/api/types/materials";
 import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
+import { useMaterialForm, MaterialFormData } from "./useMaterialForm";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { createMaterial } from "@/api/requests/materials";
 import { InputMessage } from "@/components/InputMessage";
-import { useMaterialForm } from "./useMaterialForm";
+import { getCategoryByName } from "@/store/materials";
 import { registerMaterial } from "@/store/materials";
-import { useAppDispatch } from "@/store/hooks";
 import { Input } from "@/components/Input";
+import { toast } from "sonner";
 
 interface Props {
   material?: Material;
+  onSubmit?: () => void;
 }
 
 export const MaterialForm = (props: Props) => {
+  const [loading, setLoading] = useState(false);
   const { form, schema } = useMaterialForm(props.material);
+  const { categories } = useAppSelector((state) => state.materials);
   const dispatch = useAppDispatch();
 
-  const onSubmit = (formData: Material) => {
-    console.log(formData);
-    // dispatch(registerMaterial({ ...formData, inventory: [] }));
+  const onSubmit = async (data: MaterialFormData) => {
+    try {
+      setLoading(true);
+      const { categoryId } = getCategoryByName(categories, data.category);
+      const materialId = await createMaterial({
+        categoryId,
+        name: data.name,
+        minQuantity: data.minQuantity,
+        grupoQuimico: data.grupoQuimico,
+        principioAtivo: data.principioAtivo,
+      });
+      dispatch(registerMaterial({ ...data, materialId, inventory: [] }));
+      toast.success("Novo material registrado com sucesso");
+      props.onSubmit?.();
+    } catch (e) {
+      toast.error("Failed to create new material. " + e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -86,7 +111,7 @@ export const MaterialForm = (props: Props) => {
             <InputMessage message={form.formState.errors.minQuantity.message} />
           )}
         </FormControl>
-        <Button type="submit" className="bg-sky-500">
+        <Button loading={loading} type="submit" className="bg-sky-500">
           {!!props.material ? "Atualizar" : "Registrar"}
         </Button>
       </Stack>

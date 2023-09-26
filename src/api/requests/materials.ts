@@ -19,3 +19,27 @@ export const fetchMaterialCategories = async (): Promise<
     await res.json();
   return materialCategories;
 };
+
+interface CreateMaterialRequestBody {
+  name: string;
+  minQuantity: number;
+  grupoQuimico: string;
+  principioAtivo: string;
+  categoryId: number;
+}
+
+export const createMaterial = async (
+  material: CreateMaterialRequestBody
+): Promise<number> => {
+  const res = await fetch(materialsUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(material),
+  });
+  console.log("RES >>>>", res);
+  if (!res.ok) {
+    throw new Error("Não foi possível criar novo material");
+  }
+  const { materialId }: { materialId: number } = await res.json();
+  return materialId;
+};

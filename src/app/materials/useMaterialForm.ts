@@ -2,16 +2,24 @@ import { useForm, RegisterOptions, UseFormReturn } from "react-hook-form";
 import { Material } from "@/api/types/materials";
 import { useAppSelector } from "@/store/hooks";
 
+export interface MaterialFormData {
+  name: string;
+  minQuantity: number;
+  grupoQuimico: string;
+  principioAtivo: string;
+  category: string;
+}
+
 interface UseMaterialForm {
-  form: UseFormReturn<Material>;
-  schema: Map<keyof Material, RegisterOptions>;
+  form: UseFormReturn<MaterialFormData>;
+  schema: Map<keyof MaterialFormData, RegisterOptions>;
 }
 
 export const useMaterialForm = (defaultValues?: Material): UseMaterialForm => {
   const { categories } = useAppSelector((state) => state.materials);
-  const form = useForm<Material>({ defaultValues });
+  const form = useForm<MaterialFormData>({ defaultValues });
 
-  const schema = new Map<keyof Material, RegisterOptions>();
+  const schema = new Map<keyof MaterialFormData, RegisterOptions>();
 
   schema.set("name", { required: "Favor indicar o nome do produto" });
 

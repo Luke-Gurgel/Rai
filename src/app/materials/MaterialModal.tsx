@@ -24,7 +24,7 @@ export const MaterialModal = (props: Props) => {
             <Typography level="h3" className="">
               {!!props.material ? "Editar Material" : "Registrar Novo Material"}
             </Typography>
-            <MaterialForm material={props.material} />
+            <MaterialForm material={props.material} onSubmit={props.close} />
           </Stack>
         </List>
       </ModalDialog>

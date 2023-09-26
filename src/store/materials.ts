@@ -55,3 +55,11 @@ export const {
   registerMaterial,
   filterMaterials,
 } = materialsSlice.actions;
+
+export const getCategoryByName = (
+  categories: MaterialCategory[],
+  name: string
+) => {
+  const [category] = categories.filter((c) => c.name === name);
+  return category;
+};
