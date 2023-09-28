@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Material, MaterialCategory } from "@/api/types/materials";
+import {
+  Material,
+  MaterialCategory,
+  MaterialInventory,
+} from "@/api/types/materials";
 
 export interface MaterialsFilters {
   belowMinQuantity: boolean;
@@ -33,6 +37,9 @@ const materialsSlice = createSlice({
   name: "materials",
   initialState,
   reducers: {
+    setCategories(materialsState, action: PayloadAction<MaterialCategory[]>) {
+      materialsState.categories = action.payload;
+    },
     setMaterials(materialsState, action: PayloadAction<Material[]>) {
       materialsState.data = action.payload;
     },
@@ -48,8 +55,33 @@ const materialsSlice = createSlice({
       );
       materialsState.data[i] = action.payload;
     },
-    setCategories(materialsState, action: PayloadAction<MaterialCategory[]>) {
-      materialsState.categories = action.payload;
+    addInventory(
+      materialsState,
+      action: PayloadAction<{
+        materialId: number;
+        inventory: MaterialInventory;
+      }>
+    ) {
+      const i = materialsState.data.findIndex(
+        (m) => m.materialId === action.payload.materialId
+      );
+      materialsState.data[i].inventory.push(action.payload.inventory);
+    },
+    updateInventory(
+      materialsState,
+      action: PayloadAction<{
+        materialId: number;
+        inventory: MaterialInventory;
+      }>
+    ) {
+      const materialIdx = materialsState.data.findIndex(
+        (m) => m.materialId === action.payload.materialId
+      );
+      const inventoryIdx = materialsState.data[materialIdx].inventory.findIndex(
+        (iv) => iv.inventoryId === action.payload.inventory.inventoryId
+      );
+      materialsState.data[materialIdx].inventory[inventoryIdx] =
+        action.payload.inventory;
     },
   },
 });

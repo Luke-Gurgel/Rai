@@ -9,10 +9,9 @@ import { Material } from "@/api/types/materials";
 import { materialAPI } from "@/api/requests/materials";
 import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
 import { useMaterialForm, MaterialFormData } from "./useMaterialForm";
+import { materialStore, getCategoryByName } from "@/store/materials";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { InputMessage } from "@/components/InputMessage";
-import { getCategoryByName } from "@/store/materials";
-import { materialStore } from "@/store/materials";
 import { Input } from "@/components/Input";
 import { toast } from "sonner";
 
@@ -50,7 +49,7 @@ export const MaterialForm = (props: Props) => {
       }
       props.onSubmit?.();
     } catch (e) {
-      toast.error("Failed to create new material. " + e);
+      toast.error("Não foi possível realizer a operação. " + e);
     } finally {
       setLoading(false);
     }

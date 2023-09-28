@@ -33,6 +33,7 @@ export const MaterialInventoryModal = (props: Props) => {
             <MaterialInventoryForm
               material={props.material}
               materialInventory={props.materialInventory}
+              onSubmit={props.close}
             />
           </Stack>
         </List>

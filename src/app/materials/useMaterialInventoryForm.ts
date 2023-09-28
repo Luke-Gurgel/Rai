@@ -36,6 +36,7 @@ export const useMaterialInventoryForm = (
   });
 
   schema.set("price", {
+    valueAsNumber: true,
     required: "Favor indicar a preço da compra",
   });
 

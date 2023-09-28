@@ -2,7 +2,6 @@ import { env } from "@/utils/env";
 import { Material, MaterialCategory } from "../types/materials";
 
 const materialsUrl = env.apiUrl + "/materials";
-const materialInventoryUrl = env.apiUrl + "/material-inventory";
 const materialCategoryUrl = env.apiUrl + "/material-categories";
 
 const fetchMaterials = async (): Promise<Material[]> => {

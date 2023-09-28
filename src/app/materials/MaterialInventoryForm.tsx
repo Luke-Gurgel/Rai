@@ -1,22 +1,64 @@
+"use client";
+
+import { useState } from "react";
 import Stack from "@mui/joy/Stack";
 import Button from "@mui/joy/Button";
 import { Input } from "@/components/Input";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
+import { useAppDispatch } from "@/store/hooks";
+import { materialStore } from "@/store/materials";
 import { InputMessage } from "@/components/InputMessage";
 import { Material, MaterialInventory } from "@/api/types/materials";
 import { useMaterialInventoryForm } from "./useMaterialInventoryForm";
+import { materialInventoryAPI } from "@/api/requests/materialInventory";
+import { toast } from "sonner";
 
 interface Props {
   material: Material;
   materialInventory?: MaterialInventory;
+  onSubmit?: () => void;
 }
 
 export const MaterialInventoryForm = (props: Props) => {
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
   const { form, schema } = useMaterialInventoryForm(props.materialInventory);
 
-  const onSubmit = (formData: MaterialInventory) => {
-    console.log("formData", formData);
+  const onSubmit = async (data: MaterialInventory) => {
+    try {
+      setLoading(true);
+      if (props.materialInventory) {
+        await materialInventoryAPI.updateMaterialInventory(
+          data,
+          props.materialInventory.inventoryId
+        );
+        dispatch(
+          materialStore.updateInventory({
+            materialId: props.material.materialId,
+            inventory: data,
+          })
+        );
+        toast.success("Estoque atualizado com sucesso");
+      } else {
+        const inventoryId = await materialInventoryAPI.createMaterialInventory({
+          ...data,
+          materialId: props.material.materialId,
+        });
+        dispatch(
+          materialStore.addInventory({
+            materialId: props.material.materialId,
+            inventory: { ...data, inventoryId },
+          })
+        );
+        toast.success("Estoque adicionado com sucesso");
+      }
+      props.onSubmit?.();
+    } catch (e) {
+      toast.error("Não foi possível realizer a operação. " + e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -78,7 +120,7 @@ export const MaterialInventoryForm = (props: Props) => {
             />
           )}
         </FormControl>
-        <Button type="submit" className="bg-sky-500">
+        <Button loading={loading} type="submit" className="bg-sky-500">
           {!!props.materialInventory ? "Atualizar" : "Adicionar"}
         </Button>
       </Stack>
