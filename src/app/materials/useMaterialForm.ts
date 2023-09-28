@@ -17,7 +17,7 @@ interface UseMaterialForm {
 
 export const useMaterialForm = (defaultValues?: Material): UseMaterialForm => {
   const { categories } = useAppSelector((state) => state.materials);
-  const form = useForm<MaterialFormData>({ defaultValues });
+  const form = useForm<MaterialFormData>({ defaultValues, mode: "all" });
 
   const schema = new Map<keyof MaterialFormData, RegisterOptions>();
 
@@ -44,8 +44,12 @@ export const useMaterialForm = (defaultValues?: Material): UseMaterialForm => {
   });
 
   schema.set("minQuantity", {
+    valueAsNumber: true,
     required: "Favor indicar a quantidade mínima para se ter em estoque",
-    min: 1,
+    min: {
+      value: 1,
+      message: "Favor indicar uma quantidade mínima válida",
+    },
   });
 
   return { form, schema };

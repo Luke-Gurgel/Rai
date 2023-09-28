@@ -13,7 +13,7 @@ import { Tooltip, IconButton, Button } from "@mui/joy";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   emptyFilters,
-  filterMaterials,
+  materialStore,
   MaterialsFilters,
 } from "@/store/materials";
 
@@ -25,13 +25,13 @@ export const MaterialFilters = () => {
 
   const onSubmit = (filters: MaterialsFilters) => {
     setOpen(false);
-    dispatch(filterMaterials(filters));
+    dispatch(materialStore.filterMaterials(filters));
   };
 
   const clearFilters = () => {
     setOpen(false);
     setFilters(emptyFilters);
-    dispatch(filterMaterials(emptyFilters));
+    dispatch(materialStore.filterMaterials(emptyFilters));
   };
 
   return (

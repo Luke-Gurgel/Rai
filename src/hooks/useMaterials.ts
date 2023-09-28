@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useAppSelector } from "@/store/hooks";
 import { useAppDispatch } from "@/store/hooks";
-import { setMaterials, setCategories } from "@/store/materials";
+import { materialStore } from "@/store/materials";
+import { materialAPI } from "@/api/requests/materials";
 import { toast } from "sonner";
-import {
-  fetchMaterials,
-  fetchMaterialCategories,
-} from "@/api/requests/materials";
 
 export const useMaterials = () => {
   const dispatch = useAppDispatch();
@@ -16,13 +13,21 @@ export const useMaterials = () => {
 
   useEffect(() => {
     if (!data.length) {
-      fetchMaterials()
-        .then((materials) => dispatch(setMaterials(materials)))
-        .catch((e) => toast.error("Failed to fetch materials. " + e));
+      materialAPI
+        .fetchMaterials()
+        .then((materials) => dispatch(materialStore.setMaterials(materials)))
+        .catch((e) =>
+          toast.error("Não foi possível buscar os materiais. " + e)
+        );
 
-      fetchMaterialCategories()
-        .then((categories) => dispatch(setCategories(categories)))
-        .catch((e) => toast.error("Failed to fetch material categories. " + e));
+      materialAPI
+        .fetchMaterialCategories()
+        .then((categories) => dispatch(materialStore.setCategories(categories)))
+        .catch((e) =>
+          toast.error(
+            "Não foi possível buscar as categorias dos materiais. " + e
+          )
+        );
     }
   }, [data.length, dispatch]);
 

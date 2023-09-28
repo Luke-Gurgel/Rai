@@ -36,25 +36,26 @@ const materialsSlice = createSlice({
     setMaterials(materialsState, action: PayloadAction<Material[]>) {
       materialsState.data = action.payload;
     },
-    setCategories(materialsState, action: PayloadAction<MaterialCategory[]>) {
-      materialsState.categories = action.payload;
+    filterMaterials(materialsState, action: PayloadAction<MaterialsFilters>) {
+      materialsState.filters = action.payload;
     },
     registerMaterial(materialsState, action: PayloadAction<Material>) {
       materialsState.data.push(action.payload);
     },
-    filterMaterials(materialsState, action: PayloadAction<MaterialsFilters>) {
-      materialsState.filters = action.payload;
+    updateMaterial(materialsState, action: PayloadAction<Material>) {
+      const i = materialsState.data.findIndex(
+        (m) => m.materialId === action.payload.materialId
+      );
+      materialsState.data[i] = action.payload;
+    },
+    setCategories(materialsState, action: PayloadAction<MaterialCategory[]>) {
+      materialsState.categories = action.payload;
     },
   },
 });
 
 export const { reducer: materialsReducer } = materialsSlice;
-export const {
-  setMaterials,
-  setCategories,
-  registerMaterial,
-  filterMaterials,
-} = materialsSlice.actions;
+export const materialStore = materialsSlice.actions;
 
 export const getCategoryByName = (
   categories: MaterialCategory[],

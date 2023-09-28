@@ -6,13 +6,13 @@ import Button from "@mui/joy/Button";
 import FormLabel from "@mui/joy/FormLabel";
 import FormControl from "@mui/joy/FormControl";
 import { Material } from "@/api/types/materials";
+import { materialAPI } from "@/api/requests/materials";
 import { MaterialCategorySelect } from "@/components/MaterialCategorySelect";
 import { useMaterialForm, MaterialFormData } from "./useMaterialForm";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { createMaterial } from "@/api/requests/materials";
 import { InputMessage } from "@/components/InputMessage";
 import { getCategoryByName } from "@/store/materials";
-import { registerMaterial } from "@/store/materials";
+import { materialStore } from "@/store/materials";
 import { Input } from "@/components/Input";
 import { toast } from "sonner";
 
@@ -31,15 +31,23 @@ export const MaterialForm = (props: Props) => {
     try {
       setLoading(true);
       const { categoryId } = getCategoryByName(categories, data.category);
-      const materialId = await createMaterial({
+      const reqBody = {
         categoryId,
         name: data.name,
         minQuantity: data.minQuantity,
         grupoQuimico: data.grupoQuimico,
         principioAtivo: data.principioAtivo,
-      });
-      dispatch(registerMaterial({ ...data, materialId, inventory: [] }));
-      toast.success("Novo material registrado com sucesso");
+      };
+      if (props.material) {
+        await materialAPI.updateMaterial(reqBody, props.material.materialId);
+        dispatch(materialStore.updateMaterial({ ...props.material, ...data }));
+        toast.success("Material atualizado com sucesso");
+      } else {
+        const materialId = await materialAPI.createMaterial(reqBody);
+        const newMaterial = { ...data, materialId, inventory: [] };
+        dispatch(materialStore.registerMaterial(newMaterial));
+        toast.success("Novo material registrado com sucesso");
+      }
       props.onSubmit?.();
     } catch (e) {
       toast.error("Failed to create new material. " + e);
